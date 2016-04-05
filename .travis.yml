@@ -1,0 +1,10 @@
+language: java
+deploy:
+  provider: openshift
+  user: fabianholtkoetter@gmail.com
+  password:
+    secure: b/RLubT2QM+wg5XKictpxZpeBX/X0t06ZJgfifvauIpIjQ1TbUsLo20OWxDTS93Ja6HxxaCEx4nV8vsNzgKZ2+001IlLnzU406k0CysBNXUEnUk740KqvMhFJYSmIar/FtHSxsZLQmIDjCDq64hAQPlREc9SboQYYTe+2jOLMcTxUljUUSVS8585ALDJWYy7Dm/Es9O1J8y5abMEp18zvXwSpKaAQwSnzhUUmteE8CAjxsbcMS+vFtko3Bqi4+mDZ4G+kH/VIvvNziaGI83r6dE8/p/OHxydNtzDrPduip+g+adxuUoSKWtNSb5cWnkHaTnP3CVGcCGweFaNW63jWIbzut9H2nqoGiS5tsQ/1mIq4NusUhUg4Ge1e6CY3I8cqG4b+SINL3j+ryksWAKECdtWDH7iEmmOREqxyCzrrY+N8aC45XRZ+qfWI05Ip9dFUU6fAcof24izBGJWXuyLhk2ejSxw1ikhhH3c+UFfCzThZBgtawHX86gPRZbNb8tefq5uSjfG/BBVNlrM+XZ3x83xbbursA8ralmoGpA1aFKe3LSrW91+gKnbNZQo9RQZtebrMr4PzJcDsky9ujDKBRuTPd5e3sbWCepVTOJy8OTTPEfgrM/ZQ6R15Ehmux923Rge9SN8rs+2ie+rYxlLnBgNUVAserZBlwRj6zR9aW8=
+  app: its
+  domain: webtec
+  on:
+    repo: FabianHoltkoetter/WebTech-Backend
