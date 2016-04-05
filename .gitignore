@@ -46,8 +46,9 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
-
+.target/*
+target/*
+*target/*
 # TeXlipse plugin
 .texlipse
 ### NetBeans template
