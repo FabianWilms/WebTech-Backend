@@ -34,7 +34,7 @@
 						<version>2.4</version>
 						<configuration>
 							<outputDirectory>deployments</outputDirectory>
-							<warName>ITS</warName>
+							<warName>ROOT</warName>
 						</configuration>
 					</plugin>
 				</plugins>
