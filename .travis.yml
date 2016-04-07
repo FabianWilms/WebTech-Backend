@@ -8,4 +8,5 @@ deploy:
   app: its
   domain: webtec
   on:
+    branch: master
     repo: FabianHoltkoetter/WebTech-Backend
