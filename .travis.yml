@@ -1,5 +1,6 @@
 language: java
 deploy:
+  skip_cleanup: true
   provider: openshift
   user: fabianholtkoetter@gmail.com
   password:
