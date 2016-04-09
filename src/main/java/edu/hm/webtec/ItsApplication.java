@@ -2,16 +2,18 @@ package edu.hm.webtec;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.web.SpringServletContainerInitializer;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 @SpringBootApplication
-public class ItsApplication extends SpringBootServletInitializer {
+public class ItsApplication {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(ItsApplication.class);
+	@RequestMapping("/")
+	@ResponseBody
+	String home() {
+		return "Finally working?";
 	}
 
 	public static void main(String[] args) {
