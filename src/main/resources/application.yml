@@ -1,0 +1,26 @@
+spring.profiles.active: local
+---
+spring:
+  profiles: local
+  jpa:
+    hibernate.ddl-auto: update
+    database: h2
+  datasource:
+    url: jdbc:h2:mem:data_ref
+    username: sa
+    password:
+
+---
+spring:
+  profiles: heroku
+  jpa:
+      database: postgresql
+  datasource:
+       url: ${JDBC_DATABASE_URL}
+       driver-class-name: org.postgresql.Driver
+       maxActive: 10
+       maxIdle: 5
+       minIdle: 2
+       initialSize: 5
+       removeAbandoned: true
+---
