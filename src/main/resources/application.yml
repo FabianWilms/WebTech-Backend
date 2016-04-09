@@ -13,8 +13,6 @@ spring:
 ---
 spring:
   profiles: heroku
-  jpa:
-      database: postgresql
   datasource:
        url: ${JDBC_DATABASE_URL}
        driver-class-name: org.postgresql.Driver
