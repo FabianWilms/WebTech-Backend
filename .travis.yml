@@ -1,5 +1,9 @@
 language: java
 jdk: oraclejdk8
+notifications:
+  email:
+    on_success: never
+    on_failure: always
 deploy:
   provider: heroku
   api_key:
