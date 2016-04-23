@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 /**
- * Created by Fabian on 21.04.2016.
+ * A topic describes what subjects a question covers. A question can have multiple topics, for example "java" and "math".
  */
 @Entity
 public class Topic {
@@ -17,6 +18,9 @@ public class Topic {
     @GeneratedValue
     private long id;
 
+    /**
+     * The topics name. Only one topic with the same name can exist.
+     */
     @NotEmpty
     @Column(unique = true)
     private String topic;

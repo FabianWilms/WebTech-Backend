@@ -52,6 +52,9 @@ public class TopicTest {
     }
 
 
+    /**
+     * Test the creation of a topic via the repository.
+     */
     @Test
     public void testCreate() {
         String topic = "Topic";
@@ -62,6 +65,9 @@ public class TopicTest {
         assertEquals(topic, t.getTopic());
     }
 
+    /**
+     * Test the unique constraint on the column for the topics name.
+     */
     @Test(expected = DataIntegrityViolationException.class)
     public void testDuplicate() {
         String topic = "sametopic";
@@ -73,12 +79,20 @@ public class TopicTest {
         topicRepository.save(t2);
     }
 
+    /**
+     * Test get-request on topics-endpoint.
+     * @throws Exception
+     */
     @Test
     public void testRequestGet() throws Exception {
         mockMvc.perform(get("/topics"))
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test saving a topic via REST-API
+     * @throws Exception
+     */
     @Test
     public void testRequestPost() throws Exception {
         String topic = "asdf";
