@@ -1,12 +1,11 @@
 package edu.hm.webtec.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Created by Fabian on 21.04.2016.
@@ -18,8 +17,7 @@ public class Topic {
     @GeneratedValue
     private long id;
 
-    @NotNull
-    @Size(min = 3)
+    @NotEmpty
     @Column(unique = true)
     private String topic;
 
