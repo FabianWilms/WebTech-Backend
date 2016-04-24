@@ -9,21 +9,30 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 /**
+ * Provides a simple Configuration to enable CORS in this Application.
+ *
+ * This is needed to access the Server from a Browser with a different Origin.
+ *
  * @author peter-mueller
  */
 @Configuration
 public class DataRESTCorsConfiguration {
 
+    /**
+     * Create a new CORS Filter that can handle the Preflight-Request and sends the required Access-Allow-Origin header
+     * if a request with the Origin header was sent.
+     *
+     * @return the configured CORS-Filter for the Filter-Chain.
+     */
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); // you USUALLY want this
+        config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.setAllowedMethods(Arrays.asList("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         source.registerCorsConfiguration("/**", config);
-        CorsFilter corsFilter = new CorsFilter(source);
-        return corsFilter;
+        return new CorsFilter(source);
     }
 }

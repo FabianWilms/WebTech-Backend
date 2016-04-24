@@ -1,15 +1,10 @@
 package edu.hm.webtec.configurations;
 
-import edu.hm.webtec.ItsApplication;
 import edu.hm.webtec.ItsApplicationTests;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -20,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CorsFilter;
 
 /**
+ * Provides simple Tests to check if the CORS headers are correct.
  * @author peter-mueller
  */
 public class DataRESTCorsConfigurationTest extends ItsApplicationTests {
@@ -38,6 +34,10 @@ public class DataRESTCorsConfigurationTest extends ItsApplicationTests {
                 .addFilter(corsFilter).build();
     }
 
+    /**
+     * Test if a CORS Preflight-Request works.
+     * @throws Exception
+     */
     @Test
     public void testPreflight() throws Exception {
         final MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -56,6 +56,10 @@ public class DataRESTCorsConfigurationTest extends ItsApplicationTests {
                 .andExpect(origin).andExpect(methods).andExpect(headers);
     }
 
+    /**
+     * Test for the CORS Origin specific header in every Response.
+     * @throws Exception
+     */
     @Test
     public void testCors() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/").header(HttpHeaders.ORIGIN, "*"))
