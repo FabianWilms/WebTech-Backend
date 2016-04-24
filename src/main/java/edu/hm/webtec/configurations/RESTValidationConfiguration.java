@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
- * author: Fabian Holtkötter
+ * Configuration to enable JPA-Validation before saving to the database so that no error 500 is returned but always the correct error 400 with the cause.
  */
 @Configuration
 public class RESTValidationConfiguration extends RepositoryRestConfigurerAdapter {
