@@ -1,4 +1,4 @@
-package edu.hm.webtec.configurations;
+package edu.hm.webtech.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +31,3 @@ public class RESTValidationConfiguration extends RepositoryRestConfigurerAdapter
         validatingListener.addValidator("beforeSave", validator);
     }
 }
-
-
-

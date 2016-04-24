@@ -1,4 +1,4 @@
-package edu.hm.webtec;
+package edu.hm.webtech;
 
 import java.util.Arrays;
 import java.util.Optional;

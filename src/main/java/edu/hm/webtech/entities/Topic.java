@@ -1,4 +1,4 @@
-package edu.hm.webtec.entities;
+package edu.hm.webtech.entities;
 
 import java.io.Serializable;
 import org.hibernate.validator.constraints.NotEmpty;

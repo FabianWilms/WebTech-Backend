@@ -1,6 +1,6 @@
-package edu.hm.webtec.entities;
+package edu.hm.webtech.entities;
 
-import edu.hm.webtec.TopicBloomLevel;
+import edu.hm.webtech.TopicBloomLevel;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;

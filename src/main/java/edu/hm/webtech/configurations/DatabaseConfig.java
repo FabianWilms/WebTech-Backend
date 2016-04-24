@@ -1,4 +1,4 @@
-package edu.hm.webtec.configurations;
+package edu.hm.webtech.configurations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;

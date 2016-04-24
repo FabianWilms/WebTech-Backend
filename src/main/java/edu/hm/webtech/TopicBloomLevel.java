@@ -1,6 +1,6 @@
-package edu.hm.webtec;
+package edu.hm.webtech;
 
-import edu.hm.webtec.entities.Topic;
+import edu.hm.webtech.entities.Topic;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Embeddable;
