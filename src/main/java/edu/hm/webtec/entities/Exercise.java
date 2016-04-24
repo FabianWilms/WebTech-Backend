@@ -3,7 +3,6 @@ package edu.hm.webtec.entities;
 import edu.hm.webtec.TopicBloomLevel;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CollectionTable;
@@ -12,7 +11,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**

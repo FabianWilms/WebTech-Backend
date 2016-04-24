@@ -1,6 +1,5 @@
 package edu.hm.webtec.repositories;
 
-import edu.hm.webtec.BloomLevel;
 import edu.hm.webtec.TopicBloomLevel;
 import edu.hm.webtec.entities.Exercise;
 import edu.hm.webtec.entities.Topic;
