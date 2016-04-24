@@ -1,5 +1,6 @@
-package edu.hm.webtec;
+package edu.hm.webtech;
 
+import edu.hm.webtec.ItsApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
