@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 
 /**
- * A topic describes what subjects a question covers. A question can have multiple topics, for example "java" and "math".
+ * A topic describes what subjects an {@link Exercise} covers. A question can have multiple topics, for example "java" and "math".
  */
 @Entity
 public class Topic {
@@ -39,5 +39,24 @@ public class Topic {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Topic topic1 = (Topic) o;
+
+        if (getId() != topic1.getId()) return false;
+        return getTopic().equals(topic1.getTopic());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getTopic().hashCode();
+        return result;
     }
 }
