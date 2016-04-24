@@ -31,6 +31,3 @@ public class RESTValidationConfiguration extends RepositoryRestConfigurerAdapter
         validatingListener.addValidator("beforeSave", validator);
     }
 }
-
-
-
