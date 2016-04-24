@@ -1,6 +1,6 @@
-package edu.hm.webtec.configurations;
+package edu.hm.webtech.configurations;
 
-import edu.hm.webtec.ItsApplicationTests;
+import edu.hm.webtech.ItsApplicationTests;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

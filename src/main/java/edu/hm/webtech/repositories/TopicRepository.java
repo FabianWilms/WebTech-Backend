@@ -1,6 +1,6 @@
-package edu.hm.webtec.repositories;
+package edu.hm.webtech.repositories;
 
-import edu.hm.webtec.entities.Topic;
+import edu.hm.webtech.entities.Topic;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

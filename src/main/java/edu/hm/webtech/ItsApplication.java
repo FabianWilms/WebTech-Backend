@@ -1,4 +1,4 @@
-package edu.hm.webtec;
+package edu.hm.webtech;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
