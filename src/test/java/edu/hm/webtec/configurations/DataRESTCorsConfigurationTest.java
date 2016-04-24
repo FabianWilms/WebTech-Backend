@@ -1,10 +1,10 @@
 package edu.hm.webtec.configurations;
 
 import edu.hm.webtec.ItsApplication;
+import edu.hm.webtec.ItsApplicationTests;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.HttpHeaders;
@@ -19,16 +19,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CorsFilter;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author peter-mueller
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = ItsApplication.class)
-@WebAppConfiguration
-public class DataRESTCorsConfigurationTest {
+public class DataRESTCorsConfigurationTest extends ItsApplicationTests {
 
     @Autowired
     private WebApplicationContext wac;
