@@ -1,58 +1,28 @@
-package edu.hm.webtec.entities;
+package edu.hm.webtec;
 
-import edu.hm.webtec.BloomLevel;
+import edu.hm.webtec.entities.Topic;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-
 /**
  * An TopicBloomLevel is responisble to assign a {@link Topic} to a {@link BloomLevel}.
  *
  * @author Bianca
  */
-@Entity
+@Embeddable
 public class TopicBloomLevel implements Serializable {
     
-    @Id
-    @GeneratedValue
-    private long id;
-    
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="EXERCISE_ID")
-    private Exercise exercise;
+    private static final long serialVersionUID = 1L;
     
     @NotNull
     @Enumerated(EnumType.STRING)
-    private BloomLevel bloomLevel;
+    private BloomLevel bloomLevel; 
     
     @NotNull
-    @OneToOne
     private Topic topic;
-
-    public Exercise getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public BloomLevel getBloomLevel() {
         return bloomLevel;
@@ -73,10 +43,8 @@ public class TopicBloomLevel implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 59 * hash + Objects.hashCode(this.exercise);
-        hash = 59 * hash + Objects.hashCode(this.bloomLevel);
-        hash = 59 * hash + Objects.hashCode(this.topic);
+        hash = 47 * hash + Objects.hashCode(this.bloomLevel);
+        hash = 47 * hash + Objects.hashCode(this.topic);
         return hash;
     }
 
@@ -92,12 +60,6 @@ public class TopicBloomLevel implements Serializable {
             return false;
         }
         final TopicBloomLevel other = (TopicBloomLevel) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.exercise, other.exercise)) {
-            return false;
-        }
         if (this.bloomLevel != other.bloomLevel) {
             return false;
         }
@@ -106,4 +68,6 @@ public class TopicBloomLevel implements Serializable {
         }
         return true;
     }
+    
+    
 }

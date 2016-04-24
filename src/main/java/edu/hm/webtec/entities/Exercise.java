@@ -1,13 +1,18 @@
 package edu.hm.webtec.entities;
 
+import edu.hm.webtec.TopicBloomLevel;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -25,9 +30,10 @@ public abstract class Exercise implements Serializable {
     @NotEmpty
     private String description;
     
-    @NotNull
-    @OneToMany(mappedBy="exercise")
-    private List<TopicBloomLevel> topicBloomLevel;
+    @Embedded
+    @ElementCollection
+    @CollectionTable(name="exercise_topicBloomLevel")
+    private Set<TopicBloomLevel> topicBloomLevel = new HashSet<>();
     
     public String getDescription() {
         return description;
@@ -37,11 +43,11 @@ public abstract class Exercise implements Serializable {
         this.description = description;
     }
 
-    public List<TopicBloomLevel> getTopicBloomLevel() {
+    public Set<TopicBloomLevel> getTopicBloomLevel() {
         return topicBloomLevel;
     }
 
-    public void setTopicBloomLevel(List<TopicBloomLevel> topicBloomLevel) {
+    public void setTopicBloomLevel(Set<TopicBloomLevel> topicBloomLevel) {
         this.topicBloomLevel = topicBloomLevel;
     }
 
