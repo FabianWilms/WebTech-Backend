@@ -1,31 +1,34 @@
 package edu.hm.webtec.entities;
 
-import com.sun.istack.internal.NotNull;
-import edu.hm.webtec.BloomLevel;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
 
 /**
- * A Exercise contains the mapping between {@link Topic} and {@link BloomLevel}.
+ * An Exercise contains a description and a pair of {@link BloomLevel} and {@link Topic} which is described in {@link TopicBloomLevel}. 
  * 
  * @author Bianca
  */
-
+@Entity
 public abstract class Exercise implements Serializable {
     
     @Id
-    @NotNull
-    private static final long serialVersionUID = 1L;
+    @GeneratedValue
+    private long id;
     
     @NotEmpty
     private String description;
     
     @NotNull
-    private Map<Topic, BloomLevel> topics;
-
+    @OneToMany(mappedBy="exercise")
+    private List<TopicBloomLevel> topicBloomLevel;
+    
     public String getDescription() {
         return description;
     }
@@ -34,19 +37,28 @@ public abstract class Exercise implements Serializable {
         this.description = description;
     }
 
-    public Map<Topic, BloomLevel> getTopics() {
-        return topics;
+    public List<TopicBloomLevel> getTopicBloomLevel() {
+        return topicBloomLevel;
     }
 
-    public void setTopics(Map<Topic, BloomLevel> topics) {
-        this.topics = topics;
+    public void setTopicBloomLevel(List<TopicBloomLevel> topicBloomLevel) {
+        this.topicBloomLevel = topicBloomLevel;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.topics);
+        int hash = 3;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.topicBloomLevel);
         return hash;
     }
 
@@ -62,12 +74,12 @@ public abstract class Exercise implements Serializable {
             return false;
         }
         final Exercise other = (Exercise) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.topics, other.topics)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.topicBloomLevel, other.topicBloomLevel);
     }
 }

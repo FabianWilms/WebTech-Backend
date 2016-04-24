@@ -9,8 +9,4 @@ import org.springframework.stereotype.Repository;
  * @author Bianca
  */
 @Repository
-public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
-
-    //Suchmethode um Exercises anhand eines Topics wieder zu finden
-    
-}
+public interface ExerciseRepository extends CrudRepository<Exercise, Long> {}
