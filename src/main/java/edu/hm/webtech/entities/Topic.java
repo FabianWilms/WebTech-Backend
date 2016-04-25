@@ -49,14 +49,14 @@ public class Topic {
         Topic topic1 = (Topic) o;
 
         if (getId() != topic1.getId()) return false;
-        return getTopic().equals(topic1.getTopic());
+        return getTopic() != null ? getTopic().equals(topic1.getTopic()) : topic1.getTopic() == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getTopic().hashCode();
+        result = 31 * result + (getTopic() != null ? getTopic().hashCode() : 0);
         return result;
     }
 }
