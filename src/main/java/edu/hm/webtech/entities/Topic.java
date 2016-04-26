@@ -1,12 +1,11 @@
 package edu.hm.webtech.entities;
 
+
 import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 /**
@@ -24,7 +23,11 @@ public class Topic implements Serializable {
      */
     @NotEmpty
     @Column(unique = true)
-    private String topic;
+    private String name;
+
+    @JsonIgnore
+    @Column(unique = true)
+    private String lowercaseName;
 
     public long getId() {
         return id;
@@ -34,12 +37,13 @@ public class Topic implements Serializable {
         this.id = id;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getName() {
+        return name;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setName(String name) {
+        this.name = name;
+        this.lowercaseName = name.toLowerCase();
     }
 
     @Override
@@ -50,14 +54,14 @@ public class Topic implements Serializable {
         Topic topic1 = (Topic) o;
 
         if (getId() != topic1.getId()) return false;
-        return getTopic().equals(topic1.getTopic());
+        return getName() != null ? getName().equals(topic1.getName()) : topic1.getName() == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getTopic().hashCode();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         return result;
     }
 }

@@ -41,7 +41,7 @@ public class ExerciseTest extends ItsApplicationTests {
         TopicBloomLevel tbl = new TopicBloomLevel();
         tbl.setBloomLevel(BloomLevel.VERSTEHEN);
         Topic topic = new Topic();
-        topic.setTopic("Topic");
+        topic.setName("Topic");
         tbl.setTopic(topic);
         Set<TopicBloomLevel> tbls = new HashSet<>();
         tbls.add(tbl);

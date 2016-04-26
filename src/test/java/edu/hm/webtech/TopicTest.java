@@ -47,10 +47,10 @@ public class TopicTest extends ItsApplicationTests{
     public void testCreate() {
         String topic = "Topic";
         Topic t = new Topic();
-        t.setTopic("Topic");
+        t.setName("Topic");
         t = topicRepository.save(t);
         assertNotNull(t.getId());
-        assertEquals(topic, t.getTopic());
+        assertEquals(topic, t.getName());
     }
 
     /**
@@ -61,8 +61,8 @@ public class TopicTest extends ItsApplicationTests{
         String topic = "sametopic";
         Topic t1 = new Topic();
         Topic t2 = new Topic();
-        t1.setTopic(topic);
-        t2.setTopic(topic);
+        t1.setName(topic.toLowerCase());
+        t2.setName(topic.toUpperCase());
         topicRepository.save(t1);
         topicRepository.save(t2);
     }
@@ -86,7 +86,7 @@ public class TopicTest extends ItsApplicationTests{
         String topic = "asdf";
 
         Topic t = new Topic();
-        t.setTopic(topic);
+        t.setName(topic);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -99,7 +99,7 @@ public class TopicTest extends ItsApplicationTests{
         )
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("topic", is("asdf")));
+                .andExpect(jsonPath("name", is(topic)));
     }
 
 
