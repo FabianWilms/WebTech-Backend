@@ -1,11 +1,9 @@
 package edu.hm.webtech.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 /**
@@ -25,6 +23,10 @@ public class Topic {
     @Column(unique = true)
     private String name;
 
+    @JsonIgnore
+    @Column(unique = true)
+    private String lowercaseName;
+
     public long getId() {
         return id;
     }
@@ -39,6 +41,7 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+        this.lowercaseName = name.toLowerCase();
     }
 
     @Override

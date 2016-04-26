@@ -61,8 +61,8 @@ public class TopicTest extends ItsApplicationTests{
         String topic = "sametopic";
         Topic t1 = new Topic();
         Topic t2 = new Topic();
-        t1.setName(topic);
-        t2.setName(topic);
+        t1.setName(topic.toLowerCase());
+        t2.setName(topic.toUpperCase());
         topicRepository.save(t1);
         topicRepository.save(t2);
     }
