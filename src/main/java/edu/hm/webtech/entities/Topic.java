@@ -23,7 +23,7 @@ public class Topic {
      */
     @NotEmpty
     @Column(unique = true)
-    private String topic;
+    private String name;
 
     public long getId() {
         return id;
@@ -33,12 +33,12 @@ public class Topic {
         this.id = id;
     }
 
-    public String getTopic() {
-        return topic;
+    public String getName() {
+        return name;
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -49,14 +49,14 @@ public class Topic {
         Topic topic1 = (Topic) o;
 
         if (getId() != topic1.getId()) return false;
-        return getTopic() != null ? getTopic().equals(topic1.getTopic()) : topic1.getTopic() == null;
+        return getName() != null ? getName().equals(topic1.getName()) : topic1.getName() == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + (getTopic() != null ? getTopic().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         return result;
     }
 }
