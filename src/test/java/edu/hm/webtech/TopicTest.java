@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import edu.hm.webtech.entities.Topic;
 import edu.hm.webtech.repositories.TopicRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class TopicTest extends ItsApplicationTests{
     @Before
     public void setupMockMVC() {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+    }
+
+    @After
+    public void clearDB(){
+        topicRepository.deleteAll();
     }
 
 
