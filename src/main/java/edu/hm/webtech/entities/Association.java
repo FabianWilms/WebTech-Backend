@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,11 +15,11 @@ import java.util.Set;
 @Entity
 public class Association extends Exercise {
 
-    @ElementCollection
+    @ElementCollection(targetClass = HashSet.class)
     @NotEmpty
-    private Map<String,String[]> associations = new HashMap<>();
+    private Map<String, Set<String>> associations = new HashMap<>();
 
-    public Association(String description, Set<TopicBloomLevel> topicBloomLevel, Map<String,String[]> associations) {
+    public Association(String description, Set<TopicBloomLevel> topicBloomLevel, Map<String, Set<String>> associations) {
         super();
         setDescription(description);
         setTopicBloomLevel(topicBloomLevel);
@@ -29,11 +30,11 @@ public class Association extends Exercise {
         //JPA only
     }
 
-    public Map<String, String[]> getAssociations() {
+    public Map<String, Set<String>> getAssociations() {
         return associations;
     }
 
-    public void setAssociations(Map<String, String[]> associations) {
+    public void setAssociations(Map<String, Set<String>> associations) {
         this.associations = associations;
     }
 }
