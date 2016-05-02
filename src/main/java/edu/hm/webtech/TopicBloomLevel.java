@@ -24,6 +24,13 @@ public class TopicBloomLevel implements Serializable {
     @NotNull
     private Topic topic;
 
+    public TopicBloomLevel() {}
+    
+    public TopicBloomLevel(BloomLevel bloomLevel, Topic topic) {
+        this.setBloomLevel(bloomLevel);
+        this.setTopic(topic);
+    }
+    
     public BloomLevel getBloomLevel() {
         return bloomLevel;
     }

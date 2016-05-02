@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @author Bianca
  */
 @Repository
-public interface ExerciseRepository extends CrudRepository<Exercise, TopicBloomLevel> {
+public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
     
     List<Exercise> findByTopicBloomLevelTopic(Topic topic);
 }
