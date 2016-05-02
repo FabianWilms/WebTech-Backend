@@ -36,6 +36,8 @@ public class AssociationTest extends ItsApplicationTests {
     @Before
     @Autowired
     public void setup() {
+        /**aufräumen :( */
+        exerciseRepository.deleteAll();
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .build();
 
