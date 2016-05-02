@@ -14,7 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.validation.ConstraintViolationException;
 import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static org.junit.Assert.*;
 
@@ -29,10 +32,12 @@ public class AssociationTest extends ItsApplicationTests {
     AssociationRepository associationRepository;
     @Autowired
     ExerciseRepository exerciseRepository;
+    @Autowired
+    WebApplicationContext wac;
 
     @Before
     @Autowired
-    public void setup(WebApplicationContext wac) {
+    public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .build();
 
@@ -50,6 +55,24 @@ public class AssociationTest extends ItsApplicationTests {
     @Test
     public void testDataSaved() {
         assertEquals(1, Iterables.size(exerciseRepository.findAll()));
+    }
+
+    @Test
+    public void testSaveAssociation() {
+        final Iterable<Association> all = associationRepository.findAll();
+        final Association association = all.iterator().next();
+        final Association savedAssociation = associationRepository.save(association);
+
+        final Exercise one = exerciseRepository.findOne(savedAssociation.getId());
+        assertTrue(one instanceof Association);
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testCreateEmptyAssociations(){
+        final Iterable<Association> all = associationRepository.findAll();
+        final Association association = all.iterator().next();
+        association.setAssociations(new HashMap<>());
+        associationRepository.save(association);
     }
 
 
