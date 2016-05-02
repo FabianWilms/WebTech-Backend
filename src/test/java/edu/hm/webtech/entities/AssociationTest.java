@@ -16,8 +16,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.validation.ConstraintViolationException;
 import java.util.*;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import static org.junit.Assert.*;
 
