@@ -1,5 +1,7 @@
 package edu.hm.webtech.entities;
 
+
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,7 +12,7 @@ import javax.persistence.*;
  * A topic describes what subjects an {@link Exercise} covers. A question can have multiple topics, for example "java" and "math".
  */
 @Entity
-public class Topic {
+public class Topic implements Serializable {
 
     @Id
     @GeneratedValue
@@ -26,6 +28,12 @@ public class Topic {
     @JsonIgnore
     @Column(unique = true)
     private String lowercaseName;
+
+    public Topic(){}
+
+    public Topic(String name){
+        this.setName(name);
+    }
 
     public long getId() {
         return id;
