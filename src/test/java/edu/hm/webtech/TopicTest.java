@@ -54,8 +54,7 @@ public class TopicTest extends ItsApplicationTests{
     @Test
     public void testCreate() {
         String topic = "Topic";
-        Topic t = new Topic();
-        t.setName("Topic");
+        Topic t = new Topic(topic);
         t = topicRepository.save(t);
         assertNotNull(t.getId());
         assertEquals(topic, t.getName());
@@ -63,12 +62,9 @@ public class TopicTest extends ItsApplicationTests{
 
     @Test
     public void testSearchByName(){
-        Topic t1 = new Topic();
-        Topic t2 = new Topic();
-        Topic t3 = new Topic();
-        t1.setName("A");
-        t2.setName("B");
-        t3.setName("C");
+        Topic t1 = new Topic("A");
+        Topic t2 = new Topic("B");
+        Topic t3 = new Topic("C");
         t1 = topicRepository.save(t1);
         t2 = topicRepository.save(t2);
         t3 = topicRepository.save(t3);
@@ -84,10 +80,8 @@ public class TopicTest extends ItsApplicationTests{
     @Test(expected = DataIntegrityViolationException.class)
     public void testDuplicate() {
         String topic = "sametopic";
-        Topic t1 = new Topic();
-        Topic t2 = new Topic();
-        t1.setName(topic.toLowerCase());
-        t2.setName(topic.toUpperCase());
+        Topic t1 = new Topic(topic.toLowerCase());
+        Topic t2 = new Topic(topic.toUpperCase());
         topicRepository.save(t1);
         topicRepository.save(t2);
     }
@@ -110,8 +104,7 @@ public class TopicTest extends ItsApplicationTests{
     public void testRequestPost() throws Exception {
         String topic = "asdf";
 
-        Topic t = new Topic();
-        t.setName(topic);
+        Topic t = new Topic(topic);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
