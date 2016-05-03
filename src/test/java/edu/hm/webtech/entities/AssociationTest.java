@@ -69,9 +69,7 @@ public class AssociationTest extends ItsApplicationTests {
 
     @Test(expected = ConstraintViolationException.class)
     public void testCreateEmptyAssociations(){
-        final Iterable<Association> all = associationRepository.findAll();
-        final Association association = all.iterator().next();
-        association.setAssociations(new HashMap<>());
+        final Association association = new Association("Test", null, new HashMap<>());
         associationRepository.save(association);
     }
 
