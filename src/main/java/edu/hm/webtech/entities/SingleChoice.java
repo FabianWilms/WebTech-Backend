@@ -2,6 +2,7 @@ package edu.hm.webtech.entities;
 
 import edu.hm.webtech.TopicBloomLevel;
 import edu.hm.webtech.utils.NotCompletelyEmpty;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -45,5 +46,34 @@ public class SingleChoice extends Exercise {
 
     public void setWrongChoices(Set<String> wrongChoices) {
         this.wrongChoices = wrongChoices;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.correctChoice);
+        hash = 59 * hash + Objects.hashCode(this.wrongChoices);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SingleChoice other = (SingleChoice) obj;
+        if (!Objects.equals(this.correctChoice, other.correctChoice)) {
+            return false;
+        }
+        if (!Objects.equals(this.wrongChoices, other.wrongChoices)) {
+            return false;
+        }
+        return true;
     }
 }
