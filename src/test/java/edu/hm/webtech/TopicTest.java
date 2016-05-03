@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import edu.hm.webtech.entities.Topic;
 import edu.hm.webtech.repositories.TopicRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -39,6 +42,11 @@ public class TopicTest extends ItsApplicationTests{
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
+    @After
+    public void clearDB(){
+        topicRepository.deleteAll();
+    }
+
 
     /**
      * Test the creation of a topic via the repository.
@@ -46,11 +54,24 @@ public class TopicTest extends ItsApplicationTests{
     @Test
     public void testCreate() {
         String topic = "Topic";
-        Topic t = new Topic();
-        t.setName("Topic");
+        Topic t = new Topic(topic);
         t = topicRepository.save(t);
         assertNotNull(t.getId());
         assertEquals(topic, t.getName());
+    }
+
+    @Test
+    public void testSearchByName(){
+        Topic t1 = new Topic("A");
+        Topic t2 = new Topic("B");
+        Topic t3 = new Topic("C");
+        t1 = topicRepository.save(t1);
+        t2 = topicRepository.save(t2);
+        t3 = topicRepository.save(t3);
+
+        assertEquals(topicRepository.findTopicByName("A").getId(), t1.getId());
+        assertEquals(topicRepository.findTopicByName("B").getId(), t2.getId());
+        assertEquals(topicRepository.findTopicByName("C").getId(), t3.getId());
     }
 
     /**
@@ -59,10 +80,8 @@ public class TopicTest extends ItsApplicationTests{
     @Test(expected = DataIntegrityViolationException.class)
     public void testDuplicate() {
         String topic = "sametopic";
-        Topic t1 = new Topic();
-        Topic t2 = new Topic();
-        t1.setName(topic.toLowerCase());
-        t2.setName(topic.toUpperCase());
+        Topic t1 = new Topic(topic.toLowerCase());
+        Topic t2 = new Topic(topic.toUpperCase());
         topicRepository.save(t1);
         topicRepository.save(t2);
     }
@@ -85,8 +104,7 @@ public class TopicTest extends ItsApplicationTests{
     public void testRequestPost() throws Exception {
         String topic = "asdf";
 
-        Topic t = new Topic();
-        t.setName(topic);
+        Topic t = new Topic(topic);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -101,6 +119,4 @@ public class TopicTest extends ItsApplicationTests{
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("name", is(topic)));
     }
-
-
 }

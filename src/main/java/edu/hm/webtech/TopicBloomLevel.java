@@ -1,12 +1,13 @@
 package edu.hm.webtech;
 
 import edu.hm.webtech.entities.Topic;
-import java.io.Serializable;
-import java.util.Objects;
+
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
 /**
  * An TopicBloomLevel is responisble to assign a {@link Topic} to a {@link BloomLevel}.
  *
