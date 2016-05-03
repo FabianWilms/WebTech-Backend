@@ -29,6 +29,12 @@ public class Topic implements Serializable {
     @Column(unique = true)
     private String lowercaseName;
 
+    public Topic(){}
+
+    public Topic(String name){
+        this.setName(name);
+    }
+
     public long getId() {
         return id;
     }
