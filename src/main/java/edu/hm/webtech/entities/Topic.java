@@ -1,11 +1,14 @@
 package edu.hm.webtech.entities;
 
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 
 /**
@@ -28,6 +31,13 @@ public class Topic implements Serializable {
     @JsonIgnore
     @Column(unique = true)
     private String lowercaseName;
+
+    public Topic() {
+    }
+
+    public Topic(String name) {
+        this.setName(name);
+    }
 
     public long getId() {
         return id;
