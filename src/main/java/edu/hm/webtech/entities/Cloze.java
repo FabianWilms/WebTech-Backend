@@ -1,41 +1,31 @@
 package edu.hm.webtech.entities;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Cloze with ordered and unordered solution lists. Solutions are labeled with "<##" und "##>".
+ * Cloze with ordered and unordered solution lists. Solutions are labeled with "<<<" und ">>>".
  *
  * @author M. Streich
  * @version 02.05.2016
  */
-@Entity
 public class Cloze extends Exercise {
-    private static final String REGEX_OMISSION = "<##(.?)##>";
+    private static final String REGEX_OMISSION = "[^/]<<<(.*?)[^/]>>>";
     private static final Pattern omitPattern = Pattern.compile(REGEX_OMISSION);
-
     /**
      * Text with labeled solutions.
      */
-    @NotEmpty
-    @Column
     private String text;
     /**
      * Text with omissions.
      */
-    @Column
     private String textWithOmissions;
     /**
      * Ordered solutions.
      */
-    @ElementCollection
-    private List<String> omissionsList;
+    private List<String> omissionsList = new ArrayList<>();
 
     public String getText() {
         return text;
@@ -51,7 +41,7 @@ public class Cloze extends Exercise {
     }
 
     /**
-     * Text with omissions. Omissions labeled with ***.
+     * Text with omissions. Omissions labeled with "<<<>>>".
      *
      * @return Text mit Luecken.
      */
@@ -60,7 +50,7 @@ public class Cloze extends Exercise {
     }
 
     /**
-     * Setter text. Solutions are to label with "<##" and "##>".
+     * Setter text. Solutions are to label with "<<<" and ">>>".
      *
      * @param text Text with labels.
      */
@@ -70,6 +60,6 @@ public class Cloze extends Exercise {
         while (matcher.find()) {
             this.omissionsList.add(matcher.group(1));
         }
-        this.textWithOmissions = text.replaceAll(REGEX_OMISSION, "***");
+        this.textWithOmissions = text.replaceAll(REGEX_OMISSION, "<<<>>>");
     }
 }
