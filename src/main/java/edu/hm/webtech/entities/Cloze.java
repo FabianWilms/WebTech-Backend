@@ -1,16 +1,19 @@
 package edu.hm.webtech.entities;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Cloze with ordered and unordered solution lists. Solutions are labeled with "<<<" und ">>>".
+ * Cloze with ordered and unordered solution lists. Solutions are labeled with "<<<" and ">>>".
  *
  * @author M. Streich
  * @version 02.05.2016
  */
+@Entity
 public class Cloze extends Exercise {
     private static final String REGEX_OMISSION = "[^/]<<<(.*?)[^/]>>>";
     private static final Pattern omitPattern = Pattern.compile(REGEX_OMISSION);
@@ -25,6 +28,7 @@ public class Cloze extends Exercise {
     /**
      * Ordered solutions.
      */
+    @ElementCollection
     private List<String> omissionsList = new ArrayList<>();
 
     public String getText() {

@@ -4,13 +4,14 @@
  **/
 package edu.hm.webtech.repositories;
 
-import edu.hm.webtech.TopicBloomLevel;
 import edu.hm.webtech.entities.Cloze;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author M. Streich, mstreich@hm.edu
  * @version 30.04.16.
  */
-public interface ClozeRepository extends CrudRepository<Cloze, TopicBloomLevel> {
+@Repository
+public interface ClozeRepository extends CrudRepository<Cloze, Long> {
 }
