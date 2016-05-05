@@ -1,9 +1,13 @@
 package edu.hm.webtech.entities;
 
+import edu.hm.webtech.TopicBloomLevel;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,10 +19,10 @@ import java.util.regex.Pattern;
  */
 @Entity
 public class Cloze extends Exercise {
-    private static final String REGEX_OMISSION = "[^/]<<<(.*?)[^/]>>>";
+    private static final String REGEX_OMISSION = "[^/]<<<(.*?[^/])>>>";
     private static final Pattern omitPattern = Pattern.compile(REGEX_OMISSION);
     /**
-     * Text with labeled solutions.
+     * Text with labeled solutions. != description!!!
      */
     private String text;
     /**
@@ -28,8 +32,17 @@ public class Cloze extends Exercise {
     /**
      * Ordered solutions.
      */
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> omissionsList = new ArrayList<>();
+
+    public Cloze() {
+    }
+
+    public Cloze(final String description, final String text, final Set<TopicBloomLevel> topicBloomLevels) {
+        this.setDescription(description);
+        this.setText(text);
+        this.setTopicBloomLevel(topicBloomLevels);
+    }
 
     public String getText() {
         return text;
