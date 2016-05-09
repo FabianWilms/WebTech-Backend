@@ -8,8 +8,7 @@ import javax.persistence.FetchType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Cloze with ordered and unordered solution lists. Solutions are labeled with "<<<" and ">>>".
@@ -19,8 +18,10 @@ import java.util.regex.Pattern;
  */
 @Entity
 public class Cloze extends Exercise {
-    private static final String REGEX_OMISSION = "[^/]<<<(.*?[^/])>>>";
-    private static final Pattern omitPattern = Pattern.compile(REGEX_OMISSION);
+    private static final String OMISSION_OPEN_SIGN = "<<<";
+    private static final String OMISSION_CLOSE_SIGN = ">>>";
+    private static final char ESCAPE_SIGN = '/';
+    private static final Set<Integer> OMISSION_SIGNS = (OMISSION_OPEN_SIGN + OMISSION_CLOSE_SIGN + ESCAPE_SIGN).chars().boxed().collect(Collectors.toSet());
     /**
      * Text with labeled solutions. != description!!!
      */
@@ -73,10 +74,40 @@ public class Cloze extends Exercise {
      */
     public void setText(final String text) {
         this.text = text;
-        final Matcher matcher = omitPattern.matcher(text);
-        while (matcher.find()) {
-            this.omissionsList.add(matcher.group(1));
+        this.textWithOmissions = ""; // clear
+        this.omissionsList.clear(); // clear
+        int startSubstring = 0;
+        int endSubstring = 0;
+        boolean whichSign = true; // true: awaiting omission open sign, false: awaiting omission close sign
+        String sign = OMISSION_OPEN_SIGN; // first omission sign is omission open sign
+        String buildString = ""; // saves text parts temporarily
+        while (endSubstring < text.length()) { // while not at end of string
+            if (text.charAt(endSubstring) == sign.charAt(0) && // if found omission sign
+                    text.substring(endSubstring, endSubstring + sign.length()).equals(sign)) {
+                if (whichSign) { // found omission open sign -> end of normal text part
+                    buildString += text.substring(startSubstring, endSubstring + sign.length()); // save rest of normal text part + omission open sign temporarily
+                    this.textWithOmissions += buildString; // save normal text part since last omission close sign
+                    startSubstring = endSubstring + sign.length(); // next omission part starts after omission open sign
+                    sign = OMISSION_CLOSE_SIGN; // next omission sign is omission close sign
+                } else { // found omssion close sign -> end of omission part
+                    buildString += text.substring(startSubstring, endSubstring); // save rest of omission part temporarily
+                    this.omissionsList.add(buildString); // save omission part since last omssion open sign
+                    startSubstring = endSubstring; // next normal text part starts here
+                    sign = OMISSION_OPEN_SIGN; // next omission sign is omission open sign
+                }
+                buildString = ""; // clear temp string
+                whichSign = !whichSign; // awaiting the other omission sign
+                endSubstring += sign.length(); // jump over last omission sign
+            } else if (text.charAt(endSubstring) == ESCAPE_SIGN && endSubstring + 1 < text.length() &&
+                    OMISSION_SIGNS.contains((int) text.charAt(endSubstring + 1))) { // if found escape sign followed by any omission or escape sign
+                buildString += text.substring(startSubstring, endSubstring); // save part temporarily since last omission sign
+                buildString += text.substring(endSubstring + 1, endSubstring + 2); // jump over escape sign and save escaped character temporarily
+                startSubstring = endSubstring + 2; // next part starts after escaped character
+                endSubstring += 2; // nextpart starts after escaped character
+            } else // if not found an omission sign or an escape sign
+                endSubstring++; // check next character
         }
-        this.textWithOmissions = text.replaceAll(REGEX_OMISSION, "<<<>>>");
+        this.textWithOmissions += buildString; //save rest
+        this.textWithOmissions += text.substring(startSubstring, text.length()); // save rest
     }
 }
