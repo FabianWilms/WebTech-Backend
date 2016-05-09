@@ -74,9 +74,10 @@ public class SingleChoiceTest extends ItsApplicationTests {
             Topic t = new Topic(s);
             topicRepository.save(t);
         });
-        levelA = new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName("Java"));
-        levelB = new TopicBloomLevel(BloomLevel.BEWERTEN, topicRepository.findTopicByName("Java"));
-        levelC = new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName("Scrum"));
+        
+        levelA = new TopicBloomLevel(BloomLevel.ANALYSIEREN, 1L);
+        levelB = new TopicBloomLevel(BloomLevel.BEWERTEN, 2L);
+        levelC = new TopicBloomLevel(BloomLevel.ERINNERN, 3L);
     }
 
     /**
@@ -138,11 +139,10 @@ public class SingleChoiceTest extends ItsApplicationTests {
 
         singleChoiceRepository.save(Arrays.asList(c1, c2, c3));
 
-        List<Exercise> exercises = exerciseRepository.findByTopicBloomLevelTopic(topicRepository.findTopicByName("Java"));
+        List<Exercise> exercises = exerciseRepository.findByTopicBloomLevelTopicId(1L);
 
-        assertEquals(exercises.size(), 2);
+        assertEquals(exercises.size(), 1);
         assertTrue(exercises.stream().anyMatch(exercise -> exercise.getDescription().equals(desc1)));
-        assertTrue(exercises.stream().anyMatch(exercise -> exercise.getDescription().equals(desc2)));
     }
 
     /**
