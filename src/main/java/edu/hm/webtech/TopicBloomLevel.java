@@ -31,7 +31,7 @@ public class TopicBloomLevel implements Serializable {
         this.setBloomLevel(bloomLevel);
         this.setTopicId(topicId);
     }
-
+    
     public BloomLevel getBloomLevel() {
         return bloomLevel;
     }
