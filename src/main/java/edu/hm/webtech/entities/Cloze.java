@@ -18,9 +18,21 @@ import java.util.stream.Collectors;
  */
 @Entity
 public class Cloze extends Exercise {
+    /**
+     * Labels beginning of an omission.
+     */
     private static final String OMISSION_OPEN_SIGN = "<<<";
+    /**
+     * Labels end of an omission.
+     */
     private static final String OMISSION_CLOSE_SIGN = ">>>";
+    /**
+     * Labels the following character not to use as an omission sign or an escape sign.
+     */
     private static final char ESCAPE_SIGN = '/';
+    /**
+     * Set of omission an escape signs in use.
+     */
     private static final Set<Integer> OMISSION_SIGNS = (OMISSION_OPEN_SIGN + OMISSION_CLOSE_SIGN + ESCAPE_SIGN).chars().boxed().collect(Collectors.toSet());
     /**
      * Text with labeled solutions. != description!!!

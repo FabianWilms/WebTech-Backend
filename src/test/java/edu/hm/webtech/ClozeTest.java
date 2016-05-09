@@ -35,6 +35,7 @@ public class ClozeTest extends ItsApplicationTests {
     private final static String[] topics = new String[]{"Java", "C++", "GUI", "Scrum", "GIT"};
 
     private final static String[][][] textsWithSolutions = {
+            /* {{input text}, {expected output: text with omissions}, {expected output: solutions}} */
             {{"AAAA <<<BBB>>> CCCC <<<DDD>>>."}, {"AAAA <<<>>> CCCC <<<>>>."}, {"BBB", "DDD"}},
             {{"<<<AAA>>> BBBB <<<CCC>>><<<DDD>>>."}, {"<<<>>> BBBB <<<>>><<<>>>."}, {"AAA", "CCC", "DDD"}},
             {{"<<<AAA>>> BBBB /<<<CCC/>>>."}, {"<<<>>> BBBB <<<CCC>>>."}, {"AAA"}},
