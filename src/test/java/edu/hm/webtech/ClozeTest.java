@@ -126,7 +126,7 @@ public class ClozeTest extends ItsApplicationTests {
         long time = System.currentTimeMillis();
         cloze.setText(testString);
         time = System.currentTimeMillis() - time;
-        assertTrue(time < 10);
+        assertTrue(time < 20);
         assertEquals(testString, cloze.getText());
     }
 
