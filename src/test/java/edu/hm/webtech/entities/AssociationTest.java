@@ -6,6 +6,7 @@ import edu.hm.webtech.ItsApplicationTests;
 import edu.hm.webtech.TopicBloomLevel;
 import edu.hm.webtech.repositories.AssociationRepository;
 import edu.hm.webtech.repositories.ExerciseRepository;
+import edu.hm.webtech.repositories.TopicRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,17 +32,22 @@ public class AssociationTest extends ItsApplicationTests {
     @Autowired
     ExerciseRepository exerciseRepository;
     @Autowired
+    TopicRepository topicRepository;
+    @Autowired
     WebApplicationContext wac;
 
     @Before
-    @Autowired
     public void setup() {
         /**aufräumen :( */
         exerciseRepository.deleteAll();
+        topicRepository.deleteAll();
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .build();
 
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, new Topic("A")));
+        Topic t = new Topic("A");
+        t = topicRepository.save(t);
+
+        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, t.getId()));
         final Map<String, Set<String>> associations = Collections.singletonMap("Tier", new HashSet<>(Arrays.asList("Hund", "Keks")));
         final Association association = new Association("Question?", levels, associations);
         associationRepository.save(association);
