@@ -1,8 +1,10 @@
 package edu.hm.webtech.configurations;
 
+import edu.hm.webtech.entities.Topic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.validation.Validator;
@@ -21,6 +23,11 @@ public class RESTValidationConfiguration extends RepositoryRestConfigurerAdapter
      */
     Validator validator() {
         return new LocalValidatorFactoryBean();
+    }
+
+    @Override
+    public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+        config.exposeIdsFor(Topic.class);
     }
 
     @Override

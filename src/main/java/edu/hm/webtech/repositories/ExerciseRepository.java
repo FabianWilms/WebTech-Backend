@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
     
-    List<Exercise> findByTopicBloomLevelTopic(Topic topic);
+    List<Exercise> findByTopicBloomLevelTopicId(Long topicId);
 
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import edu.hm.webtech.entities.Topic;
 import edu.hm.webtech.repositories.TopicRepository;
+import org.hamcrest.core.IsNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -117,6 +119,7 @@ public class TopicTest extends ItsApplicationTests{
         )
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("name", is(topic)));
+                .andExpect(jsonPath("name", is(topic)))
+                .andExpect(jsonPath("id").value(IsNull.notNullValue()));
     }
 }
