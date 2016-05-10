@@ -1,15 +1,16 @@
 package edu.hm.webtech.functional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.hm.webtech.BloomLevel;
 import edu.hm.webtech.ItsApplicationTests;
-import edu.hm.webtech.TopicBloomLevel;
-import edu.hm.webtech.entities.Association;
-import edu.hm.webtech.entities.MultipleChoice;
-import edu.hm.webtech.entities.Topic;
-import edu.hm.webtech.repositories.AssociationRepository;
-import edu.hm.webtech.repositories.ExerciseRepository;
-import edu.hm.webtech.repositories.MultipleChoiceRepository;
+import edu.hm.webtech.association.Association;
+import edu.hm.webtech.association.AssociationRepository;
+import edu.hm.webtech.exercise.BloomLevel;
+import edu.hm.webtech.exercise.ExerciseRepository;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.multipleChoice.MultipleChoice;
+import edu.hm.webtech.multipleChoice.MultipleChoiceRepository;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.topic.TopicRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,6 +43,8 @@ public class TeacherDocumentation extends ItsApplicationTests {
     private ObjectMapper objectMapper;
 
     @Autowired
+    private TopicRepository topicRepository;
+    @Autowired
     private ExerciseRepository exerciseRepository;
     @Autowired
     private AssociationRepository associationRepository;
@@ -58,6 +61,9 @@ public class TeacherDocumentation extends ItsApplicationTests {
     @After
     public void clean() {
         exerciseRepository.deleteAll();
+        topicRepository.deleteAll();
+        associationRepository.deleteAll();
+        multipleChoiceRepository.deleteAll();
     }
 
     @Test
@@ -68,7 +74,9 @@ public class TeacherDocumentation extends ItsApplicationTests {
 
     @Test
     public void testTeacherCanCreateExercises() throws Exception {
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, new Topic("A")));
+        Topic a = new Topic("B");
+        a = topicRepository.save(a);
+        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
         final Map<String, Set<String>> associations = new HashMap<>();
         associations.put("2", new HashSet<>(Arrays.asList("Bird")));
         associations.put("4", new HashSet<>(Arrays.asList("Cat", "Dog")));
@@ -91,7 +99,9 @@ public class TeacherDocumentation extends ItsApplicationTests {
 
     @Test
     public void getExercises() throws Exception {
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, new Topic("A")));
+        Topic a = new Topic("A");
+        a = topicRepository.save(a);
+        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
         final Set<String> correctChoices = new HashSet<>(Arrays.asList("1", "2", "3"));
         final Set<String> wrongChoices = new HashSet<>(Arrays.asList("1", "2", "3"));
         final MultipleChoice multipleChoice = new MultipleChoice(correctChoices, wrongChoices, "Have fun!", levels);
