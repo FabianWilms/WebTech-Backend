@@ -1,8 +1,10 @@
 package edu.hm.webtech;
 
-import edu.hm.webtech.entities.Exercise;
-import edu.hm.webtech.entities.Topic;
-import edu.hm.webtech.repositories.ExerciseRepository;
+import edu.hm.webtech.exercise.BloomLevel;
+import edu.hm.webtech.exercise.Exercise;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.exercise.ExerciseRepository;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Before;
@@ -42,7 +44,8 @@ public class ExerciseTest extends ItsApplicationTests {
         tbl.setBloomLevel(BloomLevel.VERSTEHEN);
         Topic topic = new Topic();
         topic.setName("Topic");
-        tbl.setTopic(topic);
+        topic.setId(1L);
+        tbl.setTopicId(topic.getId());
         Set<TopicBloomLevel> tbls = new HashSet<>();
         tbls.add(tbl);
         ExerciseHelper helper = new ExerciseHelper();

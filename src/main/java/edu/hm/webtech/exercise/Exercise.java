@@ -1,6 +1,5 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.exercise;
 
-import edu.hm.webtech.TopicBloomLevel;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,10 +10,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import edu.hm.webtech.topic.Topic;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * An Exercise contains a description and a pair of {@link BloomLevel} and {@link Topic} which is described in {@link TopicBloomLevel}. 
+ * An Exercise contains a description and a pair of {@link BloomLevel} and {@link Topic} which is described in {@link TopicBloomLevel}.
  * 
  * @author Bianca
  */

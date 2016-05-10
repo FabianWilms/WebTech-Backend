@@ -1,6 +1,5 @@
-package edu.hm.webtech.repositories;
+package edu.hm.webtech.association;
 
-import edu.hm.webtech.entities.Association;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;

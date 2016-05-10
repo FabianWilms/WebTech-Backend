@@ -1,10 +1,10 @@
-package edu.hm.webtech;
+package edu.hm.webtech.exercise;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * Represents difficulties for {@link Topic Topics} and {@link Exercise Exercises}.
+ * Represents difficulties for {@link edu.hm.webtech.topic.Topic Topics} and {@link Exercise Exercises}.
  * 
  * @author Bianca
  */

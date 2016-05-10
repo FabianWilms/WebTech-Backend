@@ -1,11 +1,15 @@
 package edu.hm.webtech.entities;
 
 import com.google.common.collect.Iterables;
-import edu.hm.webtech.BloomLevel;
+import edu.hm.webtech.exercise.BloomLevel;
 import edu.hm.webtech.ItsApplicationTests;
-import edu.hm.webtech.TopicBloomLevel;
-import edu.hm.webtech.repositories.AssociationRepository;
-import edu.hm.webtech.repositories.ExerciseRepository;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.association.Association;
+import edu.hm.webtech.association.AssociationRepository;
+import edu.hm.webtech.exercise.Exercise;
+import edu.hm.webtech.exercise.ExerciseRepository;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.topic.TopicRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,17 +35,22 @@ public class AssociationTest extends ItsApplicationTests {
     @Autowired
     ExerciseRepository exerciseRepository;
     @Autowired
+    TopicRepository topicRepository;
+    @Autowired
     WebApplicationContext wac;
 
     @Before
-    @Autowired
     public void setup() {
         /**aufräumen :( */
         exerciseRepository.deleteAll();
+        topicRepository.deleteAll();
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .build();
 
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, new Topic("A")));
+        Topic t = new Topic("A");
+        t = topicRepository.save(t);
+
+        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, t.getId()));
         final Map<String, Set<String>> associations = Collections.singletonMap("Tier", new HashSet<>(Arrays.asList("Hund", "Keks")));
         final Association association = new Association("Question?", levels, associations);
         associationRepository.save(association);
@@ -69,9 +78,7 @@ public class AssociationTest extends ItsApplicationTests {
 
     @Test(expected = ConstraintViolationException.class)
     public void testCreateEmptyAssociations(){
-        final Iterable<Association> all = associationRepository.findAll();
-        final Association association = all.iterator().next();
-        association.setAssociations(new HashMap<>());
+        final Association association = new Association("Test", null, new HashMap<>());
         associationRepository.save(association);
     }
 

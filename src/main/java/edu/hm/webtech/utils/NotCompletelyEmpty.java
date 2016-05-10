@@ -8,18 +8,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Fabian on 29.04.2016.
+ * Checks wether all given collections combined contain at least one element.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy=NotCompletelyEmptyValidator.class)
 public @interface NotCompletelyEmpty {
 
+    /**
+     * Message to be shown when validation fails.
+     *
+     * @return
+     */
     String message() default "At least one collection has to contain at least one element.";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
+    /**
+     * Names of the fields that should be checked.
+     * @return
+     */
     String[] fields();
 }

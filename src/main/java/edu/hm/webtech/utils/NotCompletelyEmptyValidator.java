@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by Fabian on 29.04.2016.
+ * Validator for the {@link NotCompletelyEmpty}-Annotation.
  */
 public class NotCompletelyEmptyValidator implements ConstraintValidator<NotCompletelyEmpty, Object> {
 

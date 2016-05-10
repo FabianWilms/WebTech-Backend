@@ -1,6 +1,7 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.multipleChoice;
 
-import edu.hm.webtech.TopicBloomLevel;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.exercise.Exercise;
 import edu.hm.webtech.utils.NotCompletelyEmpty;
 
 import javax.persistence.ElementCollection;
@@ -28,7 +29,7 @@ public class MultipleChoice extends Exercise {
     public MultipleChoice(Set<String> correctChoices,
                           Set<String> wrongChoices,
                           @NotNull String description,
-                          Set<TopicBloomLevel> topicBloomLevels){
+                          Set<TopicBloomLevel> topicBloomLevels) {
         this.setCorrectChoices(correctChoices);
         this.setWrongChoices(wrongChoices);
         this.setDescription(description);
