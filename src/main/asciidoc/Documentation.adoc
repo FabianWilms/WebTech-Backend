@@ -1,0 +1,39 @@
+= WebTech-ITS Backend API Documentation
+
+This Document outlines the basic use of the REST hal+json API.
+
+== Index / Start point
+
+The API is discoverable, this means that starting from the index one can traverse to
+every possible endpoint.
+
+Example Request to the base path:
+include::{snippets}/index/curl-request.adoc[]
+include::{snippets}/index/http-response.adoc[]
+
+== Creating Exercises as Teacher
+
+The creation of new Exercises follows the simple REST `POST` pattern.
+
+The Exercise to be created must be sent in JSON to the endpoint of the Type of exercise.
+The Content-Type must be `application/json`.
+
+=== Create a Association Exercise:
+
+include::{snippets}/association-create/http-request.adoc[]
+include::{snippets}/association-create/http-response.adoc[]
+
+=== Create a MultipleChoice Exercise:
+
+include::{snippets}/multipleChoice-create/http-request.adoc[]
+include::{snippets}/multipleChoice-create/http-response.adoc[]
+
+== Reading all Exercises
+
+To show all Exercises (of all Types) the `/exercises` Endpoint can be used.
+
+With a simple GET one can receive the accumulated List of all Types (Association, MultipleChoice, ...).
+include::{snippets}/exercises-get/http-request.adoc[]
+include::{snippets}/exercises-get/http-response.adoc[]
+
+
