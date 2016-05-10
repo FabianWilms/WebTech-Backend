@@ -1,6 +1,7 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.singleChoice;
 
-import edu.hm.webtech.TopicBloomLevel;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.exercise.Exercise;
 import edu.hm.webtech.utils.NotCompletelyEmpty;
 import java.util.Objects;
 import java.util.Set;
@@ -16,15 +17,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @NotCompletelyEmpty(fields={"wrongChoices"})
 public class SingleChoice extends Exercise {
-    
+
     @NotEmpty
     private String correctChoice;
-    
+
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> wrongChoices;
-    
+
     public SingleChoice() {}
-    
+
     public SingleChoice(final String correctChoice, final Set<String> wrongChoices, final @NotNull String description, final Set<TopicBloomLevel> topicBloomLevels) {
         this.setCorrectChoice(correctChoice);
         this.setWrongChoices(wrongChoices);
@@ -77,3 +78,4 @@ public class SingleChoice extends Exercise {
         return true;
     }
 }
+

@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import edu.hm.webtech.entities.Exercise;
-import edu.hm.webtech.entities.MultipleChoice;
-import edu.hm.webtech.entities.Topic;
-import edu.hm.webtech.repositories.ExerciseRepository;
-import edu.hm.webtech.repositories.MultipleChoiceRepository;
-import edu.hm.webtech.repositories.TopicRepository;
+import edu.hm.webtech.exercise.BloomLevel;
+import edu.hm.webtech.exercise.Exercise;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.multipleChoice.MultipleChoice;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.exercise.ExerciseRepository;
+import edu.hm.webtech.multipleChoice.MultipleChoiceRepository;
+import edu.hm.webtech.topic.TopicRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,20 +22,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-
 import javax.validation.ConstraintViolationException;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by Fabian on 29.04.2016.
@@ -138,7 +134,7 @@ public class MultipleChoiceTest extends ItsApplicationTests {
     }
 
     /**
-     * Check if the {@link ExerciseRepository#findByTopicBloomLevelTopic(Topic)} Method is correctly working.
+     * Check if the {@link ExerciseRepository#findByTopicBloomLevelTopicId(Long)} Method is correctly working.
      */
     @Test
     public void testFindBy(){
@@ -160,6 +156,7 @@ public class MultipleChoiceTest extends ItsApplicationTests {
 
     /**
      * Test GET-Request to endpoint.
+     *
      * @throws Exception
      */
     @Test
@@ -170,6 +167,7 @@ public class MultipleChoiceTest extends ItsApplicationTests {
 
     /**
      * Test POST to endpoint.
+     *
      * @throws Exception
      */
     @Test

@@ -1,11 +1,15 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.topic;
 
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.hm.webtech.exercise.Exercise;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 
 /**

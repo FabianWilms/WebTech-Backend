@@ -1,8 +1,10 @@
 package edu.hm.webtech;
 
-import edu.hm.webtech.entities.Exercise;
-import edu.hm.webtech.entities.Topic;
-import edu.hm.webtech.repositories.ExerciseRepository;
+import edu.hm.webtech.exercise.BloomLevel;
+import edu.hm.webtech.exercise.Exercise;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.exercise.ExerciseRepository;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.Before;

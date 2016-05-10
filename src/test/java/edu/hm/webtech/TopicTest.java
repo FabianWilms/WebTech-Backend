@@ -3,8 +3,8 @@ package edu.hm.webtech;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import edu.hm.webtech.entities.Topic;
-import edu.hm.webtech.repositories.TopicRepository;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.topic.TopicRepository;
 import org.hamcrest.core.IsNull;
 import org.junit.After;
 import org.junit.Before;
@@ -15,8 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
