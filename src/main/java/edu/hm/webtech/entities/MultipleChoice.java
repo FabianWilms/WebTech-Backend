@@ -23,8 +23,7 @@ public class MultipleChoice extends Exercise {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> wrongChoices;
 
-    public MultipleChoice() {
-    }
+    public MultipleChoice(){}
 
     public MultipleChoice(Set<String> correctChoices,
                           Set<String> wrongChoices,

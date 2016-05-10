@@ -23,14 +23,13 @@ public class TopicBloomLevel implements Serializable {
     private BloomLevel bloomLevel; 
     
     @NotNull
-    private Topic topic;
+    private long topicId;
 
-    public TopicBloomLevel() {
-    }
+    public TopicBloomLevel(){}
 
-    public TopicBloomLevel(BloomLevel bloomLevel, Topic topic) {
+    public TopicBloomLevel(BloomLevel bloomLevel, long topicId){
         this.setBloomLevel(bloomLevel);
-        this.setTopic(topic);
+        this.setTopicId(topicId);
     }
 
     public BloomLevel getBloomLevel() {
@@ -41,19 +40,19 @@ public class TopicBloomLevel implements Serializable {
         this.bloomLevel = bloomLevel;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public long getTopicId() {
+        return topicId;
     }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setTopicId(long topicId) {
+        this.topicId = topicId;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.bloomLevel);
-        hash = 47 * hash + Objects.hashCode(this.topic);
+        hash = 29 * hash + Objects.hashCode(this.bloomLevel);
+        hash = 29 * hash + (int) (this.topicId ^ (this.topicId >>> 32));
         return hash;
     }
 
@@ -69,14 +68,12 @@ public class TopicBloomLevel implements Serializable {
             return false;
         }
         final TopicBloomLevel other = (TopicBloomLevel) obj;
-        if (this.bloomLevel != other.bloomLevel) {
+        if (this.topicId != other.topicId) {
             return false;
         }
-        if (!Objects.equals(this.topic, other.topic)) {
+        if (this.bloomLevel != other.bloomLevel) {
             return false;
         }
         return true;
     }
-    
-    
 }
