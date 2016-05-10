@@ -1,6 +1,7 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.cloze;
 
-import edu.hm.webtech.TopicBloomLevel;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.exercise.Exercise;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;

@@ -1,6 +1,7 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.multipleChoice;
 
-import edu.hm.webtech.TopicBloomLevel;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.exercise.Exercise;
 import edu.hm.webtech.utils.NotCompletelyEmpty;
 
 import javax.persistence.ElementCollection;

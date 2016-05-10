@@ -1,12 +1,15 @@
 package edu.hm.webtech.entities;
 
 import com.google.common.collect.Iterables;
-import edu.hm.webtech.BloomLevel;
+import edu.hm.webtech.exercise.BloomLevel;
 import edu.hm.webtech.ItsApplicationTests;
-import edu.hm.webtech.TopicBloomLevel;
-import edu.hm.webtech.repositories.AssociationRepository;
-import edu.hm.webtech.repositories.ExerciseRepository;
-import edu.hm.webtech.repositories.TopicRepository;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.association.Association;
+import edu.hm.webtech.association.AssociationRepository;
+import edu.hm.webtech.exercise.Exercise;
+import edu.hm.webtech.exercise.ExerciseRepository;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.topic.TopicRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package edu.hm.webtech;
+package edu.hm.webtech.exercise;
 
-import edu.hm.webtech.entities.Topic;
+import edu.hm.webtech.topic.Topic;
 
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;

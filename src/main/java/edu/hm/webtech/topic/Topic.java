@@ -1,7 +1,8 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.topic;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.hm.webtech.exercise.Exercise;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;

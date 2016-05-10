@@ -2,9 +2,8 @@
  * Oracle Corporation Java 1.8.0_74, Ubuntu 15.10 64 Bit
  * Intel Celeron 2957U 1.4 GHz x 2, 3.8 GiB RAM
  **/
-package edu.hm.webtech.repositories;
+package edu.hm.webtech.cloze;
 
-import edu.hm.webtech.entities.Cloze;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

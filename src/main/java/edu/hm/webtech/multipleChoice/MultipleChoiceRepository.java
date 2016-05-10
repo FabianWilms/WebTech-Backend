@@ -1,13 +1,7 @@
-package edu.hm.webtech.repositories;
+package edu.hm.webtech.multipleChoice;
 
-import edu.hm.webtech.TopicBloomLevel;
-import edu.hm.webtech.entities.Exercise;
-import edu.hm.webtech.entities.MultipleChoice;
-import edu.hm.webtech.entities.Topic;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  *

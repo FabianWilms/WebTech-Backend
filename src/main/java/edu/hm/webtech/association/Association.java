@@ -1,6 +1,7 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech.association;
 
-import edu.hm.webtech.TopicBloomLevel;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.exercise.Exercise;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.ElementCollection;

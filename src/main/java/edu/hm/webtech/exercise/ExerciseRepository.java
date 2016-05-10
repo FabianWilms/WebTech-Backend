@@ -1,8 +1,5 @@
-package edu.hm.webtech.repositories;
+package edu.hm.webtech.exercise;
 
-import edu.hm.webtech.TopicBloomLevel;
-import edu.hm.webtech.entities.Exercise;
-import edu.hm.webtech.entities.Topic;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

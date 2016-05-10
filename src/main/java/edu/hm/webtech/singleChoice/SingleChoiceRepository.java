@@ -1,6 +1,5 @@
-package edu.hm.webtech.repositories;
+package edu.hm.webtech.singleChoice;
 
-import edu.hm.webtech.entities.SingleChoice;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package edu.hm.webtech.configurations;
 
-import edu.hm.webtech.entities.Topic;
+import edu.hm.webtech.topic.Topic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import edu.hm.webtech.entities.Exercise;
-import edu.hm.webtech.entities.MultipleChoice;
-import edu.hm.webtech.entities.Topic;
-import edu.hm.webtech.repositories.ExerciseRepository;
-import edu.hm.webtech.repositories.MultipleChoiceRepository;
-import edu.hm.webtech.repositories.TopicRepository;
+import edu.hm.webtech.exercise.BloomLevel;
+import edu.hm.webtech.exercise.Exercise;
+import edu.hm.webtech.exercise.TopicBloomLevel;
+import edu.hm.webtech.multipleChoice.MultipleChoice;
+import edu.hm.webtech.topic.Topic;
+import edu.hm.webtech.exercise.ExerciseRepository;
+import edu.hm.webtech.multipleChoice.MultipleChoiceRepository;
+import edu.hm.webtech.topic.TopicRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,7 +134,7 @@ public class MultipleChoiceTest extends ItsApplicationTests {
     }
 
     /**
-     * Check if the {@link ExerciseRepository#findByTopicBloomLevelTopic(Topic)} Method is correctly working.
+     * Check if the {@link ExerciseRepository#findByTopicBloomLevelTopicId(Long)} Method is correctly working.
      */
     @Test
     public void testFindBy(){
