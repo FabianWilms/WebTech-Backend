@@ -88,8 +88,7 @@ public class ClozeTest extends ItsApplicationTests {
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
             BloomLevel bloomLevel = BloomLevel.values()[random.nextInt(5)];
-            String topic = topics[random.nextInt(4)];
-            TopicBloomLevel topicBloomLevel = new TopicBloomLevel(bloomLevel, topicRepository.findTopicByName(topic));
+            TopicBloomLevel topicBloomLevel = new TopicBloomLevel(bloomLevel, topicRepository.findTopicByName(topics[i]).getId());
             result.add(topicBloomLevel);
         }
         return result;

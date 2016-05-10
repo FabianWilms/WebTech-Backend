@@ -125,7 +125,7 @@ public class SingleChoiceTest extends ItsApplicationTests {
     }
 
     /**
-     * Check if the {@link ExerciseRepository#findByTopicBloomLevelTopic(Topic)} Method is correctly working.
+     * Check if the {@link ExerciseRepository#findByTopicBloomLevelTopicId(Long)} Method is correctly working.
      */
     @Test
     public void testFindBy(){
