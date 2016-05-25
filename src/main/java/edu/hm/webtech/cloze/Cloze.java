@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Cloze with ordered and unordered solution lists. Solutions are labeled with "<<<" and ">>>".
+ * {@link Cloze} with ordered and unordered solution lists. Solutions are labeled with "<<<" and ">>>".
  *
  * @author M. Streich
  * @version 02.05.2016
@@ -37,15 +37,32 @@ public class Cloze extends Exercise {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> omissionsList = new ArrayList<>();
 
+    /**
+     * Create a new {@link Cloze}. This constructor should not be used. It's purpose is solely for JPA.
+     */
     public Cloze() {
+        //JPA only
     }
 
+    /**
+     * Create a new {@link Cloze}.
+     * 
+     * @param description The description for this Exercise
+     * @param text text with labeled solutions
+     * @param topicBloomLevels The map for the associations. The String Key will match to a Set of
+     *                        its fitting Associations.
+     */
     public Cloze(final String description, final String text, final Set<TopicBloomLevel> topicBloomLevels) {
         this.setDescription(description);
         this.setText(text);
         this.setTopicBloomLevel(topicBloomLevels);
     }
 
+    /**
+     * Get the text with labeled solutions.
+     * 
+     * @return the text with labeled solutions
+     */
     public String getText() {
         return text;
     }
@@ -62,7 +79,7 @@ public class Cloze extends Exercise {
     /**
      * Text with omissions. Omissions labeled with "<<<>>>".
      *
-     * @return Text mit Luecken.
+     * @return text with omissions.
      */
     public String getTextWithOmissions() {
         return textWithOmissions;

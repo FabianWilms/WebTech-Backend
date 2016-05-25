@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -60,6 +59,9 @@ public class TopicTest extends ItsApplicationTests{
         assertEquals(topic, t.getName());
     }
 
+    /**
+     * Test search topic by name.
+     */
     @Test
     public void testSearchByName(){
         Topic t1 = new Topic("A");

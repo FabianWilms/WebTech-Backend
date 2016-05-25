@@ -7,8 +7,17 @@ import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
+/**
+ * Configure the database.
+ */
 @Configuration
 public class DatabaseConfig {
+    
+    /**
+     * Conigure the database.
+     * 
+     * @return the datasoure 
+     */
     @Bean
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")

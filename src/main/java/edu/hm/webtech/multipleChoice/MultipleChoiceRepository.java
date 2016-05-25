@@ -4,7 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * Repositroy of the entity {@link MultipleChoice}.
+ * 
  * @author Bianca
  */
 @Repository
