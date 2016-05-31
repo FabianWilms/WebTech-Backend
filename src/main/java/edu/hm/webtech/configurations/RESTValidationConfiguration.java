@@ -26,12 +26,12 @@ public class RESTValidationConfiguration extends RepositoryRestConfigurerAdapter
     }
 
     @Override
-    public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+    public void configureRepositoryRestConfiguration(final RepositoryRestConfiguration config) {
         config.exposeIdsFor(Topic.class);
     }
 
     @Override
-    public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener validatingListener) {
+    public void configureValidatingRepositoryEventListener(final ValidatingRepositoryEventListener validatingListener) {
         Validator validator = validator();
         //bean validation always before save and create
         validatingListener.addValidator("beforeCreate", validator);

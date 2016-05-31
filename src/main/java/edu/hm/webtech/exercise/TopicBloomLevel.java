@@ -8,8 +8,9 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
+
 /**
- * An TopicBloomLevel is responisble to assign a {@link Topic} to a {@link BloomLevel}.
+ * An {@link TopicBloomLevel} is responisble to assign a {@link Topic} to a {@link BloomLevel}.
  *
  * @author Bianca
  */
@@ -25,26 +26,57 @@ public class TopicBloomLevel implements Serializable {
     @NotNull
     private long topicId;
 
-    public TopicBloomLevel(){}
+    /**
+     * Create a new {@link TopicBloomLevel}. This constructor should not be used. It's purpose is solely for JPA.
+     */
+    public TopicBloomLevel(){
+        //JPA only
+    }
 
-    public TopicBloomLevel(BloomLevel bloomLevel, long topicId){
+    /**
+     * Creates a new {@link TopicBloomLevel}.
+     * 
+     * @param bloomLevel the bloom level
+     * @param topicId id of the topic
+     */
+    public TopicBloomLevel(final BloomLevel bloomLevel, final long topicId){
         this.setBloomLevel(bloomLevel);
         this.setTopicId(topicId);
     }
 
+    /**
+     * Gets the {@link BloomLevel}.
+     * 
+     * @return bloomLevel
+     */
     public BloomLevel getBloomLevel() {
         return bloomLevel;
     }
 
-    public void setBloomLevel(BloomLevel bloomLevel) {
+    /**
+     * Sets the {@link BloomLevel}.
+     * 
+     * @param bloomLevel bloomLevel
+     */
+    public void setBloomLevel(final BloomLevel bloomLevel) {
         this.bloomLevel = bloomLevel;
     }
 
+    /**
+     * Gets the id of the {@link Topic}.
+     * 
+     * @return id of the topic
+     */
     public long getTopicId() {
         return topicId;
     }
 
-    public void setTopicId(long topicId) {
+    /**
+     * Sets the id of the {@link Topic}.
+     * 
+     * @param topicId  id of the topic
+     */
+    public void setTopicId(final long topicId) {
         this.topicId = topicId;
     }
 

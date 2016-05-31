@@ -34,27 +34,57 @@ public abstract class Exercise implements Serializable {
     @CollectionTable(name="exercise_topicBloomLevel")
     private Set<TopicBloomLevel> topicBloomLevel = new HashSet<>();
     
+    /**
+     * Gets the description.
+     * 
+     * @return description for the exercise
+     */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    /**
+     * Sets the description.
+     * 
+     * @param description description for the exercise
+     */
+    public void setDescription(final String description) {
         this.description = description;
     }
 
+    /**
+     * Gets the Topic BloomLevel combination.
+     * 
+     * @return the Topic BloomLevel combination.
+     */
     public Set<TopicBloomLevel> getTopicBloomLevel() {
         return topicBloomLevel;
     }
 
-    public void setTopicBloomLevel(Set<TopicBloomLevel> topicBloomLevel) {
+    /**
+     * Sets the Topic BloomLevel combination.
+     * 
+     * @param topicBloomLevel the Topic BloomLevel combination
+     */
+    public void setTopicBloomLevel(final Set<TopicBloomLevel> topicBloomLevel) {
         this.topicBloomLevel = topicBloomLevel;
     }
 
+    /**
+     * Gets the id.
+     * 
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    /**
+     * Sets the id. 
+     * 
+     * @param id the id
+     */
+    public void setId(final long id) {
         this.id = id;
     }
 

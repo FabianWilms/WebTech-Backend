@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * Single Choice represents a Single Choice question. It contains one correct and a set of wrong choices.
+ * {@link SingleChoice} represents a single choice question. It contains one correct and a set of wrong choices.
  */
 @Entity
 @NotCompletelyEmpty(fields={"wrongChoices"})
@@ -24,8 +24,21 @@ public class SingleChoice extends Exercise {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> wrongChoices;
 
-    public SingleChoice() {}
+    /**
+     * Create a new {@link SingleChoice}. This constructor should not be used. It's purpose is solely for JPA.
+     */
+    public SingleChoice() {
+        //JPA only
+    }
 
+    /**
+     * Create a new {@link SingleChoice}.
+     * 
+     * @param correctChoice the correct choice of the exercise
+     * @param wrongChoices the wrong choices of the exercise
+     * @param description the description of the exercise
+     * @param topicBloomLevels the TopicBloomLevel combination of the exercise
+     */
     public SingleChoice(final String correctChoice, final Set<String> wrongChoices, final @NotNull String description, final Set<TopicBloomLevel> topicBloomLevels) {
         this.setCorrectChoice(correctChoice);
         this.setWrongChoices(wrongChoices);
@@ -33,19 +46,39 @@ public class SingleChoice extends Exercise {
         this.setTopicBloomLevel(topicBloomLevels);
     }
 
+    /**
+     * Gets the correct choice of the exercise.
+     * 
+     * @return the correct choice of the exercise
+     */
     public String getCorrectChoice() {
         return correctChoice;
     }
 
-    public void setCorrectChoice(String correctChoice) {
+    /**
+     * Sets the correct choice of the exercise.
+     * 
+     * @param correctChoice the correct choice of the exercise
+     */
+    public void setCorrectChoice(final String correctChoice) {
         this.correctChoice = correctChoice;
     }
 
+    /**
+     * Gets the wrong choices of the exercise.
+     * 
+     * @return the wrong choices of the exercise
+     */
     public Set<String> getWrongChoices() {
         return wrongChoices;
     }
 
-    public void setWrongChoices(Set<String> wrongChoices) {
+    /**
+     * Sets the wrong choices of the exercise.
+     * 
+     * @param wrongChoices the wrong choices of the exercise
+     */
+    public void setWrongChoices(final Set<String> wrongChoices) {
         this.wrongChoices = wrongChoices;
     }
 
