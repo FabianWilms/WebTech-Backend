@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 /**
@@ -56,7 +57,19 @@ public class TestdataInitializer {
         return new ResponseEntity<>("Created", HttpStatus.CREATED);
     }
 
-    private String[] topics = new String[]{"Java", "GUI", "C", "Software Engineering", "Scrum", "Web-Techniken", "Lesen"};
+    private String[] topics = new String[]{
+            "Java",                     // 0
+            "GUI",                      // 1
+            "C",                        // 2
+            "Software Engineering",     // 3
+            "Scrum",                    // 4
+            "Web-Techniken",            // 5
+            "Lesen",                    // 6
+            "Exceptions",               // 7
+            "Block-Anweisungen",        // 8
+            "if-Anweisungen",           // 9
+            "Vergleichsoperatoren",     // 10
+            "Operatoren"};              // 11
 
     private void createTopics() {
         Stream.of(topics).forEach(s -> topicRepository.save(new Topic(s)));
@@ -82,6 +95,41 @@ public class TestdataInitializer {
                         new TopicBloomLevel(BloomLevel.KREIEREN, topicRepository.findTopicByName(topics[1]).getId()),
                         new TopicBloomLevel(BloomLevel.BEWERTEN, topicRepository.findTopicByName(topics[2]).getId())
                 }))
+        ));
+
+        singleChoiceList.add(new SingleChoice(
+                "3, true",
+                new HashSet<>(Arrays.asList(new String[]{"3, false", "11, false", "11, true"})),
+                "Gegeben sei folgender Java-Quelltext:\n\n" +
+                        "int a = 11;\n" +
+                        "int b = 3;\n" +
+                        "int max;\n" +
+                        "boolean correct = true;\n" +
+                        "if(a > b){\n" +
+                        "max = b;\n" +
+                        "} else {\n" +
+                        "max = a;\n" +
+                        "correct = false;\n\n" +
+                        "Welchen Wert haben max und correct nach Ausführung dieser Anweisung?",
+                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                        new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[8]).getId()),
+                        new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[9]).getId()),
+                        new TopicBloomLevel(BloomLevel.ANWENDEN, topicRepository.findTopicByName(topics[9]).getId())
+                }))
+        ));
+
+        singleChoiceList.add(new SingleChoice(
+                "Wahr",
+                Collections.singleton("Falsch"),
+                "In Java bezeichnet \"!=\" den relationalen Vergleichsoperator für Ungleichheit",
+                Collections.singleton(new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[10]).getId()))
+        ));
+
+        singleChoiceList.add(new SingleChoice(
+                "Wahr",
+                Collections.singleton("Falsch"),
+                "Die Typumwandlung (type cast) hat eine engere Bindung und damit bei der Ausführung eine höhere Priorität als die arithmetischen operatoren +, -, * und /.",
+                Collections.singleton(new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[11]).getId()))
         ));
 
         singleChoiceRepository.save(singleChoiceList);
@@ -150,6 +198,20 @@ public class TestdataInitializer {
                 "Stoff für Diskussionen bietet gerne der CORS-Filter. Dieser muss nämlich <Server>- und nicht <Client>-seitig aktiviert werden.",
                 new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName(topics[5]).getId()),
+                }))
+        ));
+
+        clozeList.add(new Cloze(
+                "Ändern Sie die Methode doSomething() aus der vorherigen Augabe so, dass die Ausnahme die aufrufende Methode weiter wirft. Tragen Sie je Kasten genau ein Wort ein.",
+                "public void doSomething() <throws> <ProblemOccuredException> {\n" +
+                        "if(problemOccurs()) {\n" +
+                        "throw new ProblemOccuredException(\"trouble executing doSomething\");\n" +
+                        "}\n" +
+                        "}",
+                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                        new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName(topics[7]).getId()),
+                        new TopicBloomLevel(BloomLevel.ANWENDEN, topicRepository.findTopicByName(topics[7]).getId()),
+                        new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[7]).getId())
                 }))
         ));
 
