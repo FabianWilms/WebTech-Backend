@@ -1,5 +1,12 @@
 # WebTech-Backend
 
+## Lokal starten
+
+1. Clone
+2. Import into IDE
+3. Maven install
+4. Run ItsApplication.java
+
 ## API-Dokumentation
 
 ### Endpunkte
