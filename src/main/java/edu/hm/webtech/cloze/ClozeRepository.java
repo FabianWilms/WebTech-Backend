@@ -8,6 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
+ * Repository of the entity {@link Cloze}.
+ * 
  * @author M. Streich, mstreich@hm.edu
  * @version 30.04.16.
  */

@@ -1,6 +1,5 @@
 package edu.hm.webtech.topic;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.hm.webtech.exercise.Exercise;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -13,7 +12,7 @@ import java.io.Serializable;
 
 
 /**
- * A topic describes what subjects an {@link Exercise} covers. A question can have multiple topics, for example "java" and "math".
+ * A {@link Topic} describes what subjects an {@link Exercise} covers. A question can have multiple topics, for example "java" and "math".
  */
 @Entity
 public class Topic implements Serializable {
@@ -33,24 +32,54 @@ public class Topic implements Serializable {
     @Column(unique = true)
     private String lowercaseName;
 
-    public Topic() {}
+    /**
+     * Create a new {@link Topic}. This constructor should not be used. It's purpose is solely for JPA.
+     */
+    public Topic() {
+        //JPA only
+    }
 
+    /**
+     * Creates a new {@link Topic}.
+     * 
+     * @param name the name of the topic
+     */
     public Topic(String name) {
         this.setName(name);
     }
 
+    /**
+     * Gets the id of the {@link Topic}.
+     * 
+     * @return the id of the topic
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Sets the id of the {@link Topic}.
+     * 
+     * @param id the id of the topic
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Gets the name of the {@link Topic}.
+     * 
+     * @return the name of the topic
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the {@link Topic}.
+     * 
+     * @param name the name of the topic
+     */
     public void setName(String name) {
         this.name = name;
         this.lowercaseName = name.toLowerCase();

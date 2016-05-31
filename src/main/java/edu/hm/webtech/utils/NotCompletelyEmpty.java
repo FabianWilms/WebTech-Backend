@@ -18,7 +18,7 @@ public @interface NotCompletelyEmpty {
     /**
      * Message to be shown when validation fails.
      *
-     * @return
+     * @return the message
      */
     String message() default "At least one collection has to contain at least one element.";
 
@@ -28,7 +28,7 @@ public @interface NotCompletelyEmpty {
 
     /**
      * Names of the fields that should be checked.
-     * @return
+     * @return the fields
      */
     String[] fields();
 }
