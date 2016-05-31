@@ -2,10 +2,7 @@
 
 ## Lokal starten
 
-1. Clone
-2. Import into IDE
-3. Maven install
-4. Run ItsApplication.java
+https://github.com/FabianHoltkoetter/WebTech-Backend/wiki/Wie-kann-ich-das-Projekt-lokal-zum-Laufen-bringen%3F
 
 ## API-Dokumentation
 
