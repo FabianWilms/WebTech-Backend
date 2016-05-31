@@ -25,14 +25,14 @@ public class Association extends Exercise {
     private Map<String, Set<String>> associations = new HashMap<>();
 
     /**
-     * Create a new Association.
+     * Create a new {@link Association}.
      *
      * @param description     The description for this Exercise.
      * @param topicBloomLevel The Topic and Bloom Level of this Exercise.
      * @param associations    The map for the associations. The String Key will match to a Set of
      *                        its fitting Associations.
      */
-    public Association(String description, Set<TopicBloomLevel> topicBloomLevel, Map<String, Set<String>> associations) {
+    public Association(final String description, final Set<TopicBloomLevel> topicBloomLevel, final Map<String, Set<String>> associations) {
         super();
         setDescription(description);
         setTopicBloomLevel(topicBloomLevel);
@@ -40,7 +40,7 @@ public class Association extends Exercise {
     }
 
     /**
-     * Create a new Association. This constructor should not be used. It's purpose is solely for JPA.
+     * Create a new {@link Association}. This constructor should not be used. It's purpose is solely for JPA.
      */
     Association() {
         //JPA only
@@ -58,7 +58,7 @@ public class Association extends Exercise {
      * Set the Associations.
      * @param associations A map with a key describing the Association to a Set of his correct Values.
      */
-    public void setAssociations(Map<String, Set<String>> associations) {
+    public void setAssociations(final Map<String, Set<String>> associations) {
         this.associations = associations;
     }
 }

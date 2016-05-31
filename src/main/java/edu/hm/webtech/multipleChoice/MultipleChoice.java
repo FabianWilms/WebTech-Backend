@@ -24,31 +24,64 @@ public class MultipleChoice extends Exercise {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> wrongChoices;
 
-    public MultipleChoice(){}
-
-    public MultipleChoice(Set<String> correctChoices,
-                          Set<String> wrongChoices,
-                          @NotNull String description,
-                          Set<TopicBloomLevel> topicBloomLevels) {
-        this.setCorrectChoices(correctChoices);
-        this.setWrongChoices(wrongChoices);
-        this.setDescription(description);
-        this.setTopicBloomLevel(topicBloomLevels);
+    /**
+     * Create a new {@link MultipleChoice}. This constructor should not be used. It's purpose is solely for JPA.
+     */
+    public MultipleChoice(){
+        //JPA only
     }
 
+    /**
+     * Creates a new {@link MultipleChoice}.
+     * 
+     * @param correctChoices the correct choices of the exercise
+     * @param wrongChoices the wrong choices of the exercise
+     * @param description the description of the exercise
+     * @param topicBloomLevels the TopicBloomLevels of the exercise
+     */
+    public MultipleChoice(final Set<String> correctChoices,
+                          final Set<String> wrongChoices,
+                          final @NotNull String description,
+                          final Set<TopicBloomLevel> topicBloomLevels) {
+        setCorrectChoices(correctChoices);
+        setWrongChoices(wrongChoices);
+        setDescription(description);
+        setTopicBloomLevel(topicBloomLevels);
+    }
+
+    /**
+     * Gets the correct choices of the exercise.
+     * 
+     * @return correct choices of the exercise
+     */
     public Set<String> getCorrectChoices() {
         return correctChoices;
     }
 
-    public void setCorrectChoices(Set<String> correctChoices) {
+    /**
+     * Sets the correct choices of exercise.
+     * 
+     * @param correctChoices correct choices of the exercise
+     */
+    public void setCorrectChoices(final Set<String> correctChoices) {
         this.correctChoices = correctChoices;
     }
 
+    /**
+     * Gets the wrong choices of the exercise.
+     * 
+     * @return wrong choices of the exercise
+     */
     public Set<String> getWrongChoices() {
         return wrongChoices;
     }
 
-    public void setWrongChoices(Set<String> wrongChoices) {
+    /**
+     * Sets the wrong choices of the exercise.
+     * 
+     * @param wrongChoices wrong choices of the exercise
+     */
+    public void setWrongChoices(final Set<String> wrongChoices) {
         this.wrongChoices = wrongChoices;
     }
 }

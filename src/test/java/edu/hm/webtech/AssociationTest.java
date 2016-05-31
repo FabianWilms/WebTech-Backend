@@ -1,4 +1,4 @@
-package edu.hm.webtech.entities;
+package edu.hm.webtech;
 
 import com.google.common.collect.Iterables;
 import edu.hm.webtech.exercise.BloomLevel;
@@ -61,11 +61,17 @@ public class AssociationTest extends ItsApplicationTests {
         exerciseRepository.deleteAll();
     }
 
+    /**
+     * Test data saved.
+     */
     @Test
     public void testDataSaved() {
         assertEquals(1, Iterables.size(exerciseRepository.findAll()));
     }
 
+    /**
+     * Test save association.
+     */
     @Test
     public void testSaveAssociation() {
         final Iterable<Association> all = associationRepository.findAll();
@@ -76,6 +82,9 @@ public class AssociationTest extends ItsApplicationTests {
         assertTrue(one instanceof Association);
     }
 
+    /**
+     * Test if empty association is created.
+     */
     @Test(expected = ConstraintViolationException.class)
     public void testCreateEmptyAssociations(){
         final Association association = new Association("Test", null, new HashMap<>());

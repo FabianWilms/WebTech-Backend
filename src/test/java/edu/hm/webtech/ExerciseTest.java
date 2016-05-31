@@ -34,11 +34,19 @@ public class ExerciseTest extends ItsApplicationTests {
          mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
     }
 
+    /**
+     * Helper class to test creation of an {@link Exercise}.
+     */
     private class ExerciseHelper extends Exercise {
         public ExerciseHelper() {
         }
     }
     
+    /**
+     * Create an {@link Exercise}.
+     * 
+     * @return an {@link ExerciseHelper}
+     */
     private ExerciseHelper createExercise() {
         TopicBloomLevel tbl = new TopicBloomLevel();
         tbl.setBloomLevel(BloomLevel.VERSTEHEN);
@@ -56,11 +64,18 @@ public class ExerciseTest extends ItsApplicationTests {
         return helper;
     }
     
+    /**
+     * Test creation of an {@link Exercise}.
+     */
     @Test
     public void testCreate() {
         createExercise();
     }
     
+    /**
+     * Test GET-Request to endpoint.
+     * @throws Exception 
+     */
     @Test
     public void testRequestGet() throws Exception {
         mockMvc.perform(get("/exercises"))
