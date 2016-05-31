@@ -41,4 +41,4 @@ Der self-Link verweist dabei immer auf diese Entität und dient auch als ID für
 
 ## Domain-Modell
 
-![domain](https://docs.google.com/drawings/d/1lu95IIlvC_vYBZsw5VztX_c7M5aR_ThyMZtHFN8EAsI/pub?w=828&amp;h=589)
+![domain](https://cloud.githubusercontent.com/assets/18287674/15497563/98635ec4-219b-11e6-8051-19f52faffaf3.PNG)
