@@ -3,6 +3,8 @@ package edu.hm.webtech.singleChoice;
 import edu.hm.webtech.exercise.TopicBloomLevel;
 import edu.hm.webtech.exercise.Exercise;
 import edu.hm.webtech.utils.NotCompletelyEmpty;
+
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.ElementCollection;
@@ -39,7 +41,7 @@ public class SingleChoice extends Exercise {
      * @param description the description of the exercise
      * @param topicBloomLevels the TopicBloomLevel combination of the exercise
      */
-    public SingleChoice(final String correctChoice, final Set<String> wrongChoices, final @NotNull String description, final Set<TopicBloomLevel> topicBloomLevels) {
+    public SingleChoice(final String correctChoice, final Set<String> wrongChoices, final @NotNull String description, final List<TopicBloomLevel> topicBloomLevels) {
         this.setCorrectChoice(correctChoice);
         this.setWrongChoices(wrongChoices);
         this.setDescription(description);

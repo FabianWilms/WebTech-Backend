@@ -52,7 +52,7 @@ public class Cloze extends Exercise {
      * @param topicBloomLevels The map for the associations. The String Key will match to a Set of
      *                        its fitting Associations.
      */
-    public Cloze(final String description, final String text, final Set<TopicBloomLevel> topicBloomLevels) {
+    public Cloze(final String description, final String text, final List<TopicBloomLevel> topicBloomLevels) {
         this.setDescription(description);
         this.setText(text);
         this.setTopicBloomLevel(topicBloomLevels);

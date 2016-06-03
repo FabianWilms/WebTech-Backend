@@ -82,7 +82,7 @@ public class TestdataInitializer {
                 "Richtig!",
                 new HashSet<>(Arrays.asList(new String[]{"Falsch", "Ganz Falsch", "Besonders Falsch"})),
                 "Dies ist eine wichtige Java-Frage",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<TopicBloomLevel>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName(topics[0]).getId())
                 }))
         ));
@@ -91,7 +91,7 @@ public class TestdataInitializer {
                 "Nein",
                 new HashSet<>(Arrays.asList(new String[]{"Ja", "Natürlich"})),
                 "Ist es schön eine GUI in C zu schreiben?",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<TopicBloomLevel>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.KREIEREN, topicRepository.findTopicByName(topics[1]).getId()),
                         new TopicBloomLevel(BloomLevel.BEWERTEN, topicRepository.findTopicByName(topics[2]).getId())
                 }))
@@ -111,7 +111,7 @@ public class TestdataInitializer {
                         "max = a;\n" +
                         "correct = false;\n\n" +
                         "Welchen Wert haben max und correct nach Ausführung dieser Anweisung?",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<TopicBloomLevel>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[8]).getId()),
                         new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[9]).getId()),
                         new TopicBloomLevel(BloomLevel.ANWENDEN, topicRepository.findTopicByName(topics[9]).getId())
@@ -122,14 +122,14 @@ public class TestdataInitializer {
                 "Wahr",
                 Collections.singleton("Falsch"),
                 "In Java bezeichnet \"!=\" den relationalen Vergleichsoperator für Ungleichheit",
-                Collections.singleton(new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[10]).getId()))
+                Collections.singletonList(new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[10]).getId()))
         ));
 
         singleChoiceList.add(new SingleChoice(
                 "Wahr",
                 Collections.singleton("Falsch"),
                 "Die Typumwandlung (type cast) hat eine engere Bindung und damit bei der Ausführung eine höhere Priorität als die arithmetischen operatoren +, -, * und /.",
-                Collections.singleton(new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[11]).getId()))
+                Collections.singletonList(new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[11]).getId()))
         ));
 
         singleChoiceRepository.save(singleChoiceList);
@@ -142,7 +142,7 @@ public class TestdataInitializer {
                 new HashSet<>(Arrays.asList(new String[]{"Gut", "Hilfreich"})),
                 new HashSet<>(Arrays.asList(new String[]{"Schlecht", "Nicht mein ding", "Was ist Scrum?"})),
                 "Scrum ist...",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.BEWERTEN, topicRepository.findTopicByName(topics[4]).getId())
                 }))
         ));
@@ -151,7 +151,7 @@ public class TestdataInitializer {
                 new HashSet<>(Arrays.asList(new String[]{"Schmolymer", "Ungalar", "WYSIWYG"})),
                 new HashSet<>(Arrays.asList(new String[]{"Polymer", "Angular"})),
                 "Welche Frameworks gibt es nicht?",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.BEWERTEN, topicRepository.findTopicByName(topics[5]).getId()),
                         new TopicBloomLevel(BloomLevel.BEWERTEN, topicRepository.findTopicByName(topics[1]).getId())
                 }))
@@ -175,7 +175,7 @@ public class TestdataInitializer {
 
         associationRepository.save(new Association(
                 "Verbinden Sie die Gruppen.",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName(topics[6]).getId()),
                 })),
                 associationsmap
@@ -188,7 +188,7 @@ public class TestdataInitializer {
         clozeList.add(new Cloze(
                 "Füllen Sie die Lücken aus.",
                 "Ich bin ein Text mit <Lücken>. Man nennt mich einen Lückentext. Dieser hier ist aber eher <unspannend>.",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ANWENDEN, topicRepository.findTopicByName(topics[6]).getId()),
                 }))
         ));
@@ -196,7 +196,7 @@ public class TestdataInitializer {
         clozeList.add(new Cloze(
                 "Füllen Sie die Lücken aus.",
                 "Stoff für Diskussionen bietet gerne der CORS-Filter. Dieser muss nämlich <Server>- und nicht <Client>-seitig aktiviert werden.",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName(topics[5]).getId()),
                 }))
         ));
@@ -208,7 +208,7 @@ public class TestdataInitializer {
                         "throw new ProblemOccuredException(\"trouble executing doSomething\");\n" +
                         "}\n" +
                         "}",
-                new HashSet<>(Arrays.asList(new TopicBloomLevel[]{
+                new ArrayList<>(Arrays.asList(new TopicBloomLevel[]{
                         new TopicBloomLevel(BloomLevel.ANALYSIEREN, topicRepository.findTopicByName(topics[7]).getId()),
                         new TopicBloomLevel(BloomLevel.ANWENDEN, topicRepository.findTopicByName(topics[7]).getId()),
                         new TopicBloomLevel(BloomLevel.ERINNERN, topicRepository.findTopicByName(topics[7]).getId())

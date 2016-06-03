@@ -6,10 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Provides a {@link Exercise} type that asks to connect multiple unique Strings to one or multiple matching ones.
@@ -32,7 +29,7 @@ public class Association extends Exercise {
      * @param associations    The map for the associations. The String Key will match to a Set of
      *                        its fitting Associations.
      */
-    public Association(final String description, final Set<TopicBloomLevel> topicBloomLevel, final Map<String, Set<String>> associations) {
+    public Association(final String description, final List<TopicBloomLevel> topicBloomLevel, final Map<String, Set<String>> associations) {
         super();
         setDescription(description);
         setTopicBloomLevel(topicBloomLevel);
