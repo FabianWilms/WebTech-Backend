@@ -142,9 +142,9 @@ public class MultipleChoiceTest extends ItsApplicationTests {
         String desc2 = "Test2";
         String desc3 = "Test3";
         Set<String> choices = new HashSet<>(Arrays.asList("a", "b", "c"));
-        MultipleChoice c1 = new MultipleChoice(choices, new HashSet<>(), desc1, new HashSet<>(Arrays.asList(levelA, levelC)));
-        MultipleChoice c2 = new MultipleChoice(choices, new HashSet<>(), desc2, new HashSet<>(Collections.singletonList(levelB)));
-        MultipleChoice c3 = new MultipleChoice(choices, new HashSet<>(), desc3, new HashSet<>(Collections.singletonList(levelC)));
+        MultipleChoice c1 = new MultipleChoice(choices, new HashSet<>(), desc1, new ArrayList<>(Arrays.asList(levelA, levelC)));
+        MultipleChoice c2 = new MultipleChoice(choices, new HashSet<>(), desc2, new ArrayList<>(Collections.singletonList(levelB)));
+        MultipleChoice c3 = new MultipleChoice(choices, new HashSet<>(), desc3, new ArrayList<>(Collections.singletonList(levelC)));
 
         multipleChoiceRepository.save(Arrays.asList(c1, c2, c3));
 

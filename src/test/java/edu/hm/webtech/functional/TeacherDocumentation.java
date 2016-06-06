@@ -76,7 +76,7 @@ public class TeacherDocumentation extends ItsApplicationTests {
     public void testTeacherCanCreateExercises() throws Exception {
         Topic a = new Topic("B");
         a = topicRepository.save(a);
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
+        final List<TopicBloomLevel> levels = Collections.singletonList(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
         final Map<String, Set<String>> associations = new HashMap<>();
         associations.put("2", new HashSet<>(Arrays.asList("Bird")));
         associations.put("4", new HashSet<>(Arrays.asList("Cat", "Dog")));
@@ -101,7 +101,7 @@ public class TeacherDocumentation extends ItsApplicationTests {
     public void getExercises() throws Exception {
         Topic a = new Topic("A");
         a = topicRepository.save(a);
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
+        final List<TopicBloomLevel> levels = Collections.singletonList(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
         final Set<String> correctChoices = new HashSet<>(Arrays.asList("1", "2", "3"));
         final Set<String> wrongChoices = new HashSet<>(Arrays.asList("1", "2", "3"));
         final MultipleChoice multipleChoice = new MultipleChoice(correctChoices, wrongChoices, "Have fun!", levels);

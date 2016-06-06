@@ -8,6 +8,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -42,7 +43,7 @@ public class MultipleChoice extends Exercise {
     public MultipleChoice(final Set<String> correctChoices,
                           final Set<String> wrongChoices,
                           final @NotNull String description,
-                          final Set<TopicBloomLevel> topicBloomLevels) {
+                          final List<TopicBloomLevel> topicBloomLevels) {
         setCorrectChoices(correctChoices);
         setWrongChoices(wrongChoices);
         setDescription(description);

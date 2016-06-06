@@ -1,9 +1,7 @@
 package edu.hm.webtech.exercise;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
@@ -32,7 +30,7 @@ public abstract class Exercise implements Serializable {
     @Embedded
     @ElementCollection
     @CollectionTable(name="exercise_topicBloomLevel")
-    private Set<TopicBloomLevel> topicBloomLevel = new HashSet<>();
+    private List<TopicBloomLevel> topicBloomLevel = new ArrayList<>();
     
     /**
      * Gets the description.
@@ -57,7 +55,7 @@ public abstract class Exercise implements Serializable {
      * 
      * @return the Topic BloomLevel combination.
      */
-    public Set<TopicBloomLevel> getTopicBloomLevel() {
+    public List<TopicBloomLevel> getTopicBloomLevel() {
         return topicBloomLevel;
     }
 
@@ -66,7 +64,7 @@ public abstract class Exercise implements Serializable {
      * 
      * @param topicBloomLevel the Topic BloomLevel combination
      */
-    public void setTopicBloomLevel(final Set<TopicBloomLevel> topicBloomLevel) {
+    public void setTopicBloomLevel(final List<TopicBloomLevel> topicBloomLevel) {
         this.topicBloomLevel = topicBloomLevel;
     }
 

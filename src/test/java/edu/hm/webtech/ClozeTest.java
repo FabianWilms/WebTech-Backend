@@ -85,8 +85,8 @@ public class ClozeTest extends ItsApplicationTests {
      *
      * @return 3 random topicBloomLevels.
      */
-    private Set<TopicBloomLevel> randomTopicBloomLevel() {
-        Set<TopicBloomLevel> result = new HashSet<>();
+    private List<TopicBloomLevel> randomTopicBloomLevel() {
+        List<TopicBloomLevel> result = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 3; i++) {
             BloomLevel bloomLevel = BloomLevel.values()[random.nextInt(5)];

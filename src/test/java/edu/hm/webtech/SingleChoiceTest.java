@@ -56,9 +56,10 @@ public class SingleChoiceTest extends ItsApplicationTests {
 
     private String[] topics = new String[]{"Java", "C++", "GUI", "Scrum", "GIT"};
 
-    TopicBloomLevel levelA;
-    TopicBloomLevel levelB;
-    TopicBloomLevel levelC;
+    private TopicBloomLevel levelA;
+    private TopicBloomLevel levelAA;
+    private TopicBloomLevel levelB;
+    private TopicBloomLevel levelC;
 
     private MockMvc mockMvc;
 
@@ -78,6 +79,7 @@ public class SingleChoiceTest extends ItsApplicationTests {
         });
         
         levelA = new TopicBloomLevel(BloomLevel.ANALYSIEREN, 1L);
+        levelAA = new TopicBloomLevel(BloomLevel.KREIEREN, 1L);
         levelB = new TopicBloomLevel(BloomLevel.BEWERTEN, 2L);
         levelC = new TopicBloomLevel(BloomLevel.ERINNERN, 3L);
     }
@@ -108,7 +110,8 @@ public class SingleChoiceTest extends ItsApplicationTests {
         String correctChoice = "a";
         HashSet<String> wrongChoices = new HashSet<String>(Arrays.asList("c", "d", "e"));
 
-        SingleChoice choiceA = new SingleChoice(correctChoice, wrongChoices, "Test", null);
+        SingleChoice choiceA = new SingleChoice(correctChoice, wrongChoices, "Test",
+                new ArrayList<>(Arrays.asList(levelA, levelAA)));
         
         choiceA = singleChoiceRepository.save(choiceA);
         choiceA = singleChoiceRepository.findOne(choiceA.getId());
@@ -135,9 +138,9 @@ public class SingleChoiceTest extends ItsApplicationTests {
         String desc2 = "Test2";
         String desc3 = "Test3";
         Set<String> choices = new HashSet<>(Arrays.asList("a", "b", "c"));
-        SingleChoice c1 = new SingleChoice("a", choices, desc1, new HashSet<>(Arrays.asList(levelA, levelC)));
-        SingleChoice c2 = new SingleChoice("b", choices, desc2, new HashSet<>(Collections.singletonList(levelB)));
-        SingleChoice c3 = new SingleChoice("c", choices, desc3, new HashSet<>(Collections.singletonList(levelC)));
+        SingleChoice c1 = new SingleChoice("a", choices, desc1, new ArrayList<>(Arrays.asList(levelA, levelC)));
+        SingleChoice c2 = new SingleChoice("b", choices, desc2, new ArrayList<>(Collections.singletonList(levelB)));
+        SingleChoice c3 = new SingleChoice("c", choices, desc3, new ArrayList<>(Collections.singletonList(levelC)));
 
         singleChoiceRepository.save(Arrays.asList(c1, c2, c3));
 

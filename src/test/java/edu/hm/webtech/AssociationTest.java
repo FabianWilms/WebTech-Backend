@@ -50,7 +50,7 @@ public class AssociationTest extends ItsApplicationTests {
         Topic t = new Topic("A");
         t = topicRepository.save(t);
 
-        final Set<TopicBloomLevel> levels = Collections.singleton(new TopicBloomLevel(BloomLevel.ANWENDEN, t.getId()));
+        final List<TopicBloomLevel> levels = Collections.singletonList(new TopicBloomLevel(BloomLevel.ANWENDEN, t.getId()));
         final Map<String, Set<String>> associations = Collections.singletonMap("Tier", new HashSet<>(Arrays.asList("Hund", "Keks")));
         final Association association = new Association("Question?", levels, associations);
         associationRepository.save(association);

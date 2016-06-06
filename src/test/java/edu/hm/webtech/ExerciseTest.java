@@ -5,7 +5,10 @@ import edu.hm.webtech.exercise.Exercise;
 import edu.hm.webtech.exercise.TopicBloomLevel;
 import edu.hm.webtech.topic.Topic;
 import edu.hm.webtech.exercise.ExerciseRepository;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +57,7 @@ public class ExerciseTest extends ItsApplicationTests {
         topic.setName("Topic");
         topic.setId(1L);
         tbl.setTopicId(topic.getId());
-        Set<TopicBloomLevel> tbls = new HashSet<>();
+        List<TopicBloomLevel> tbls = new ArrayList<>();
         tbls.add(tbl);
         ExerciseHelper helper = new ExerciseHelper();
         helper.setDescription("Exercise");
