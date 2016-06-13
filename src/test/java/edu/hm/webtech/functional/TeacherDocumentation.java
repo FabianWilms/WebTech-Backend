@@ -94,16 +94,48 @@ public class TeacherDocumentation extends ItsApplicationTests {
                 .andExpect(status().isCreated())
                 .andDo(document("association-create"));
 
-        final Map<String,Object> multipleChoice = new HashMap<>();
-        multipleChoice.put("description","Choose all Colors that contain blue!");
+        final Map<String, Object> multipleChoice = new HashMap<>();
+        multipleChoice.put("description", "Choose all Colors that contain blue!");
         multipleChoice.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
         multipleChoice.put("correctChoices", new String[]{"Blue", "Cyan"});
-        multipleChoice.put("wrongChoices", new String[]{"Red","Green"});
+        multipleChoice.put("wrongChoices", new String[]{"Red", "Green"});
 
         mockMvc.perform(post("/multipleChoices").contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(multipleChoice)))
+                .content(objectMapper.writeValueAsString(multipleChoice)))
                 .andExpect(status().isCreated())
                 .andDo(document("multipleChoice-create"));
+
+        final Map<String, Object> singleChoice = new HashMap<>();
+        singleChoice.put("description", "Choose Blue!");
+        singleChoice.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
+        singleChoice.put("correctChoice", "Blue");
+        singleChoice.put("wrongChoices", new String[]{"Green", "Red"});
+
+        mockMvc.perform(post("/singleChoices").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(singleChoice)))
+                .andExpect(status().isCreated())
+                .andDo(document("singleChoice-create"));
+
+        final Map<String, Object> cloze = new HashMap<>();
+        cloze.put("description", "Fill in the Gaps!");
+        cloze.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
+        cloze.put("text", "The correct color choice is always <Blue>.");
+
+        mockMvc.perform(post("/clozes").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(cloze)))
+                .andExpect(status().isCreated())
+                .andDo(document("cloze-create"));
+    }
+
+    @Test
+    public void testTeacherCanCreateTopic() throws Exception {
+        final HashMap<String,Object> topic = new HashMap<>();
+        topic.put("name", "Golang");
+
+        mockMvc.perform(post("/topics").contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(topic)))
+                .andExpect(status().isCreated())
+                .andDo(document("topic-create"));
     }
 
     @Test
