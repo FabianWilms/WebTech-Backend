@@ -76,25 +76,66 @@ public class TeacherDocumentation extends ItsApplicationTests {
     public void testTeacherCanCreateExercises() throws Exception {
         Topic a = new Topic("B");
         a = topicRepository.save(a);
-        final List<TopicBloomLevel> levels = Collections.singletonList(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
-        final Map<String, Set<String>> associations = new HashMap<>();
-        associations.put("2", new HashSet<>(Arrays.asList("Bird")));
-        associations.put("4", new HashSet<>(Arrays.asList("Cat", "Dog")));
-        final Association association = new Association("Please match the Animals to their amount of feet.", levels, associations);
+
+        final Map<String, Object> simpleTopicBloomLevel = new HashMap<>();
+        simpleTopicBloomLevel.put("bloomLevel", "ANWENDEN");
+        simpleTopicBloomLevel.put("topicId", a.getId());
+
+        final Map<String, Object> association = new HashMap<>();
+        association.put("description", "Please match the Animals to their amount of feet.");
+        association.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
+        final Map<String, Object> associations = new HashMap<>();
+        associations.put("2", new String[]{"Bird"});
+        associations.put("4", new String[]{"Dog", "Cat"});
+        association.put("associations", associations);
 
         this.mockMvc.perform(post("/associations").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(association)))
                 .andExpect(status().isCreated())
                 .andDo(document("association-create"));
 
-        final Set<String> correctChoices = new HashSet<>(Arrays.asList("1", "2", "3"));
-        final Set<String> wrongChoices = new HashSet<>(Arrays.asList("1", "2", "3"));
-        final MultipleChoice multipleChoice = new MultipleChoice(correctChoices, wrongChoices, "Have fun!", levels);
+        final Map<String, Object> multipleChoice = new HashMap<>();
+        multipleChoice.put("description", "Choose all Colors that contain blue!");
+        multipleChoice.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
+        multipleChoice.put("correctChoices", new String[]{"Blue", "Cyan"});
+        multipleChoice.put("wrongChoices", new String[]{"Red", "Green"});
 
         mockMvc.perform(post("/multipleChoices").contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(multipleChoice)))
+                .content(objectMapper.writeValueAsString(multipleChoice)))
                 .andExpect(status().isCreated())
                 .andDo(document("multipleChoice-create"));
+
+        final Map<String, Object> singleChoice = new HashMap<>();
+        singleChoice.put("description", "Choose Blue!");
+        singleChoice.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
+        singleChoice.put("correctChoice", "Blue");
+        singleChoice.put("wrongChoices", new String[]{"Green", "Red"});
+
+        mockMvc.perform(post("/singleChoices").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(singleChoice)))
+                .andExpect(status().isCreated())
+                .andDo(document("singleChoice-create"));
+
+        final Map<String, Object> cloze = new HashMap<>();
+        cloze.put("description", "Fill in the Gaps!");
+        cloze.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
+        cloze.put("text", "The correct color choice is always <Blue>.");
+
+        mockMvc.perform(post("/clozes").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(cloze)))
+                .andExpect(status().isCreated())
+                .andDo(document("cloze-create"));
+    }
+
+    @Test
+    public void testTeacherCanCreateTopic() throws Exception {
+        final HashMap<String,Object> topic = new HashMap<>();
+        topic.put("name", "Golang");
+
+        mockMvc.perform(post("/topics").contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(topic)))
+                .andExpect(status().isCreated())
+                .andDo(document("topic-create"));
     }
 
     @Test
