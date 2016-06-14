@@ -36,19 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ClozeTest extends ItsApplicationTests {
     private final static String[] topics = new String[]{"Java", "C++", "GUI", "Scrum", "GIT"};
 
-    private final static String[][][] textsWithSolutions = {
-            /* {{input text}, {expected output: text with omissions}, {expected output: solutions}} */
-            {{"AAAA <BBB> CCCC <DDD>."}, {"AAAA <> CCCC <>."}, {"BBB", "DDD"}},
-            {{"<AAA> BBBB <CCC><DDD>."}, {"<> BBBB <><>."}, {"AAA", "CCC", "DDD"}},
-            {{"<AAA> BBBB \\<CCC\\>."}, {"<> BBBB \\<CCC\\>."}, {"AAA"}},
-            {{"<AAA> BBBB <CCC\\>>"}, {"<> BBBB <>"}, {"AAA", "CCC\\>"}},
-            {{"<\\\\\\>"}, {"<\\\\\\>"}, {}},
-            {{"<\\>\\>\\>>"}, {"<>"}, {"\\>\\>\\>"}},
-            {{"<\\<>"}, {"<>"}, {"\\<"}},
-            {{"\\<Text\\>"}, {"\\<Text\\>"}, {}},
-            {{"<\\\\\\> <\\>\\>\\>\\>>"}, {"<\\\\\\> <>"}, {"\\>\\>\\>\\>"}}
-    };
-
     @Autowired
     private TopicRepository topicRepository;
 
@@ -60,6 +47,9 @@ public class ClozeTest extends ItsApplicationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private MockMvc mockMvc;
 
@@ -80,63 +70,15 @@ public class ClozeTest extends ItsApplicationTests {
         exerciseRepository.deleteAll();
     }
 
-    /**
-     * 3 random topicBloomLevels.
-     *
-     * @return 3 random topicBloomLevels.
-     */
-    private List<TopicBloomLevel> randomTopicBloomLevel() {
-        List<TopicBloomLevel> result = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            BloomLevel bloomLevel = BloomLevel.values()[random.nextInt(5)];
-            TopicBloomLevel topicBloomLevel = new TopicBloomLevel(bloomLevel, topicRepository.findTopicByName(topics[i]).getId());
-            result.add(topicBloomLevel);
-        }
-        return result;
-    }
 
     /**
      * Test if {@link Cloze} is correctly saved.
      */
     @Test
     public void saveClozeCorrectlyTest() {
-        List<Cloze> clozes = Arrays.stream(textsWithSolutions)
-                .map(text -> new Cloze("Description", text[0][0], randomTopicBloomLevel()))
-                .collect(Collectors.toList());
-        clozes.stream().forEach(clozeRepository::save);
-        for (int i = 0; i < textsWithSolutions.length; i++) {
 
-            String text = clozeRepository.findOne(clozes.get(i).getId()).getText();
-            assertEquals(textsWithSolutions[i][0][0], text);
-
-            String textWithOmissions = clozeRepository.findOne(clozes.get(i).getId()).getTextWithOmissions();
-            assertEquals(textsWithSolutions[i][1][0], textWithOmissions);
-
-            List<String> omissonsList = clozeRepository.findOne(clozes.get(i).getId()).getOmissionsList();
-            for (int j = 0; j < textsWithSolutions[i][2].length; j++) {
-                if (!omissonsList.isEmpty()) {
-                    System.out.println(omissonsList);
-                    assertEquals(textsWithSolutions[i][2][j], omissonsList.get(j));
-                }
-                assertEquals(omissonsList.isEmpty(), textsWithSolutions[i][2].length == 0);
-            }
-        }
     }
 
-    /**
-     * Speed test for {@link Cloze}.
-     */
-    @Test
-    public void speedTest() {
-        final String testString = "<Hier> steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>. Hier steht ein <Text>, der <gefiltert werden soll>.";
-        Cloze cloze = new Cloze("Description", "anyText", randomTopicBloomLevel());
-        long time = System.currentTimeMillis();
-        cloze.setText(testString);
-        time = System.currentTimeMillis() - time;
-        assertTrue(time < 20);
-        assertEquals(testString, cloze.getText());
-    }
 
     /**
      * Test GET-Request to endpoint.
@@ -156,15 +98,11 @@ public class ClozeTest extends ItsApplicationTests {
      */
     @Test
     public void testRequestPost() throws Exception {
-        Cloze choice = new Cloze("Test", "Text<omission>Text", null);
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter writer = mapper.writer().withDefaultPrettyPrinter();
+        Cloze choice = new Cloze("Test", "Text[[omission]]Text", null);
 
         mockMvc.perform(post("/clozes")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(writer.writeValueAsString(choice))
+                .content(objectMapper.writeValueAsString(choice))
                 .accept(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isCreated())

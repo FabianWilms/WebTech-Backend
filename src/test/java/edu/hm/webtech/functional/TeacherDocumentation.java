@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hm.webtech.ItsApplicationTests;
 import edu.hm.webtech.association.Association;
 import edu.hm.webtech.association.AssociationRepository;
+import edu.hm.webtech.cloze.ClozeRepository;
 import edu.hm.webtech.exercise.BloomLevel;
 import edu.hm.webtech.exercise.ExerciseRepository;
 import edu.hm.webtech.exercise.TopicBloomLevel;
 import edu.hm.webtech.multipleChoice.MultipleChoice;
 import edu.hm.webtech.multipleChoice.MultipleChoiceRepository;
+import edu.hm.webtech.singleChoice.SingleChoiceRepository;
 import edu.hm.webtech.topic.Topic;
 import edu.hm.webtech.topic.TopicRepository;
 import org.junit.After;
@@ -49,6 +51,10 @@ public class TeacherDocumentation extends ItsApplicationTests {
     @Autowired
     private AssociationRepository associationRepository;
     @Autowired
+    private SingleChoiceRepository singleChoiceRepository;
+    @Autowired
+    private ClozeRepository clozeRepository;
+    @Autowired
     private MultipleChoiceRepository multipleChoiceRepository;
 
     @Before
@@ -62,7 +68,9 @@ public class TeacherDocumentation extends ItsApplicationTests {
     public void clean() {
         exerciseRepository.deleteAll();
         topicRepository.deleteAll();
+        clozeRepository.deleteAll();
         associationRepository.deleteAll();
+        singleChoiceRepository.deleteAll();
         multipleChoiceRepository.deleteAll();
     }
 
@@ -119,7 +127,7 @@ public class TeacherDocumentation extends ItsApplicationTests {
         final Map<String, Object> cloze = new HashMap<>();
         cloze.put("description", "Fill in the Gaps!");
         cloze.put("topicBloomLevel", Collections.singletonList(simpleTopicBloomLevel));
-        cloze.put("text", "The correct color choice is always <Blue>.");
+        cloze.put("text", "The correct color choice is always [[Blue]].");
 
         mockMvc.perform(post("/clozes").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(cloze)))
@@ -139,7 +147,26 @@ public class TeacherDocumentation extends ItsApplicationTests {
     }
 
     @Test
-    public void getExercises() throws Exception {
+    public void testTeacherCanUpdateExercises() throws  Exception {
+
+    }
+
+    @Test
+    public void testTeacherCanUpdateTopic() throws Exception {
+        Topic a = new Topic("B");
+        a = topicRepository.save(a);
+
+        final HashMap<String, Object> updateTopic = new HashMap<>();
+        updateTopic.put("name","BB");
+
+        mockMvc.perform(put("/topics/" + a.getId()).contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updateTopic)))
+                .andExpect(status().isNoContent())
+                .andDo(document("topic-update"));
+    }
+
+    @Test
+    public void testTeacherCanReadExercises() throws Exception {
         Topic a = new Topic("A");
         a = topicRepository.save(a);
         final List<TopicBloomLevel> levels = Collections.singletonList(new TopicBloomLevel(BloomLevel.ANWENDEN, a.getId()));
