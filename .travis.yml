@@ -5,7 +5,6 @@ notifications:
     on_success: never
     on_failure: always
     
-before_deploy: 'heroku config:set MAVEN_CUSTOM_OPTS=""'
 deploy:
   provider: heroku
   api_key:
@@ -14,4 +13,3 @@ deploy:
   on:
     branch: master
     repo: FabianHoltkoetter/WebTech-Backend
-  skip_cleanup: true
