@@ -5,7 +5,7 @@ notifications:
     on_success: never
     on_failure: always
     
-before_deploy: "mvn test"
+before_deploy: 'heroku config:set MAVEN_CUSTOM_OPTS=""'
 deploy:
   provider: heroku
   api_key:
