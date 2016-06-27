@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * {@link Cloze} with ordered and unordered solution lists. Solutions are labeled with "<<<" and ">>>".
+ * {@link Cloze} type.
  *
  * @author M. Streich
  * @version 02.05.2016
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class Cloze extends Exercise {
 
     /**
-     * Text with labeled solutions. != description!!!
+     * Text with labeled solutions.
      */
     @NotEmpty
     private String text;

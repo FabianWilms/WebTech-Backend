@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface AssociationRepository extends CrudRepository<Association, Long> {
     
     /**
-     * Find all {@link Associations}.
+     * Find all {@link Association}.
      * @return all associations
      */
     @Override
@@ -21,7 +21,7 @@ public interface AssociationRepository extends CrudRepository<Association, Long>
     Iterable<Association> findAll();
 
     /**
-     * Find all {@link Associations} with associated {@code iterable}.
+     * Find all {@link Association} with associated {@code iterable}.
      * @param iterable iterable
      * @return all matching associations
      */

@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -77,7 +79,7 @@ public class ExerciseTest extends ItsApplicationTests {
     
     /**
      * Test GET-Request to endpoint.
-     * @throws Exception 
+     * @throws Exception Exception thrown by {@link MockMvc#perform(RequestBuilder)}
      */
     @Test
     public void testRequestGet() throws Exception {
