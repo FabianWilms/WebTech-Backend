@@ -37,6 +37,7 @@ public class TeacherDocumentation extends ItsApplicationTests {
 
     @Rule
     public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/generated-snippets");
+
     private MockMvc mockMvc;
 
     @Autowired
@@ -60,7 +61,10 @@ public class TeacherDocumentation extends ItsApplicationTests {
     @Before
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-                .apply(documentationConfiguration(this.restDocumentation))
+                .apply(documentationConfiguration(this.restDocumentation).uris()
+                        .withHost("webtech-its.herokuapp.com")
+                        .withPort(80)
+                        .withScheme("https"))
                 .build();
     }
 
@@ -137,17 +141,17 @@ public class TeacherDocumentation extends ItsApplicationTests {
 
     @Test
     public void testTeacherCanCreateTopic() throws Exception {
-        final HashMap<String,Object> topic = new HashMap<>();
+        final HashMap<String, Object> topic = new HashMap<>();
         topic.put("name", "Golang");
 
         mockMvc.perform(post("/topics").contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(topic)))
+                .content(objectMapper.writeValueAsString(topic)))
                 .andExpect(status().isCreated())
                 .andDo(document("topic-create"));
     }
 
     @Test
-    public void testTeacherCanUpdateExercises() throws  Exception {
+    public void testTeacherCanUpdateExercises() throws Exception {
 
     }
 
@@ -157,7 +161,7 @@ public class TeacherDocumentation extends ItsApplicationTests {
         a = topicRepository.save(a);
 
         final HashMap<String, Object> updateTopic = new HashMap<>();
-        updateTopic.put("name","BB");
+        updateTopic.put("name", "BB");
 
         mockMvc.perform(put("/topics/" + a.getId()).contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updateTopic)))

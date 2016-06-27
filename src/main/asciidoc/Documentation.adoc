@@ -11,6 +11,20 @@ Example Request to the base path:
 include::{snippets}/index/curl-request.adoc[]
 include::{snippets}/index/http-response.adoc[]
 
+== Topics
+
+Topics only contain a single property `name`. They are really easy to store using standard REST.
+
+=== Create a Topic as a Teacher
+
+include::{snippets}/topic-create/http-request.adoc[]
+include::{snippets}/topic-create/http-response.adoc[]
+
+=== Update a Topic as a Teacher
+
+include::{snippets}/topic-update/http-request.adoc[]
+include::{snippets}/topic-update/http-response.adoc[]
+
 == Creating Exercises as Teacher
 
 The creation of new Exercises follows the simple REST `POST` pattern.
@@ -18,15 +32,28 @@ The creation of new Exercises follows the simple REST `POST` pattern.
 The Exercise to be created must be sent in JSON to the endpoint of the Type of exercise.
 The Content-Type must be `application/json`.
 
+
+
+=== Create a Cloze Exercise:
+
+include::{snippets}/singleChoice-create/http-request.adoc[]
+include::{snippets}/singleChoice-create/http-response.adoc[]
+
+=== Create a Single Choice Exercise:
+
+include::{snippets}/singleChoice-create/http-request.adoc[]
+include::{snippets}/singleChoice-create/http-response.adoc[]
+
+=== Create a Multiple Choice Exercise:
+
+include::{snippets}/multipleChoice-create/http-request.adoc[]
+include::{snippets}/multipleChoice-create/http-response.adoc[]
+
 === Create a Association Exercise:
 
 include::{snippets}/association-create/http-request.adoc[]
 include::{snippets}/association-create/http-response.adoc[]
 
-=== Create a MultipleChoice Exercise:
-
-include::{snippets}/multipleChoice-create/http-request.adoc[]
-include::{snippets}/multipleChoice-create/http-response.adoc[]
 
 == Reading all Exercises
 
