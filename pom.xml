@@ -5,7 +5,29 @@
 
     <groupId>edu.hm.webtech</groupId>
     <artifactId>its</artifactId>
+    <name>Intelligent Tutoring System Backend</name>
+    <description>Backend for the Intelligent Tutoring System.</description>
+    <url>https://webtech-its.herokuapp.com/</url>
+    <inceptionYear>2016</inceptionYear>
     <version>0.0.1-SNAPSHOT</version>
+
+    <developers>
+        <developer>
+            <name>Peter Müller</name>
+            <email>mueller64@hm.edu</email>
+            <organization>HM</organization>
+        </developer>
+        <developer>
+            <name>Bianca Toni</name>
+            <email>toni@hm.edu</email>
+            <organization>HM</organization>
+        </developer>
+        <developer>
+            <name>Fabian Holtkötter</name>
+            <email>holtkoet@hm.edu</email>
+            <organization>HM</organization>
+        </developer>
+    </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
